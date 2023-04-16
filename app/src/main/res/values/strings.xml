@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Wallpaper Engine</string>
+    <string name="activity_side_et_submit_button">OK</string>
+    <string name="main_set_image_title">Set your image</string>
+    <string name="main_set_image_preview_description">Image preview</string>
+    <string name="main_set_image_path">Image path</string>
+    <string name="main_set_image_choose_button_text">Choose image</string>
+</resources>
