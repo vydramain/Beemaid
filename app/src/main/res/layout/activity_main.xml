@@ -11,49 +11,63 @@
     android:paddingBottom="1dp"
     tools:context=".activities.main.MainActivity">
 
+    <LinearLayout
+        android:id="@+id/main_set_image_data"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/main_set_image_preview"
+        >
+
     <TextView
         android:id="@+id/main_set_image_title"
         android:name="main_set_image_title"
-        android:layout_width="216dp"
-        android:layout_height="36dp"
-        android:paddingLeft="1dp"
-        android:paddingTop="1dp"
-        android:paddingRight="1dp"
-        android:paddingBottom="1dp"
         android:text="@string/main_set_image_title"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="19dp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/main_set_image_path"
         android:name="main_set_image_path"
-        android:layout_width="216dp"
-        android:layout_height="36dp"
-        android:paddingLeft="1dp"
-        android:paddingTop="1dp"
-        android:paddingRight="1dp"
-        android:paddingBottom="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/main_set_image_path"
-        app:layout_constraintTop_toBottomOf="@+id/main_set_image_title"
-        tools:layout_editor_absoluteX="16dp" />
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_set_image_title" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/main_set_image_preview"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_marginStart="36dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:contentDescription="@string/main_set_image_preview_description"
-        app:layout_constraintStart_toEndOf="@+id/main_set_image_title"
-        app:srcCompat="@android:drawable/ic_menu_gallery"
-        tools:layout_editor_absoluteY="20dp" />
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
 
     <Button
         android:id="@+id/main_set_image_choose_button"
-        android:layout_width="332dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="16dp"
         android:text="@string/main_set_image_choose_button_text"
-        app:layout_constraintTop_toBottomOf="@+id/main_set_image_path"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+
+        app:layout_constraintTop_toBottomOf="@+id/main_set_image_data"
         tools:layout_editor_absoluteX="16dp" />
 
 
