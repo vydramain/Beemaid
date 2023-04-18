@@ -15,35 +15,34 @@
         android:id="@+id/main_set_image_data"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:orientation="vertical"
 
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/main_set_image_preview"
-        >
-
-    <TextView
-        android:id="@+id/main_set_image_title"
-        android:name="main_set_image_title"
-        android:text="@string/main_set_image_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/main_set_image_path"
-        android:name="main_set_image_path"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/main_set_image_path"
+        <TextView
+            android:id="@+id/main_set_image_title"
+            android:name="main_set_image_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/main_set_image_title"
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_set_image_title" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/main_set_image_path"
+            android:name="main_set_image_path"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/main_set_image_path"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_set_image_title" />
     </LinearLayout>
 
     <ImageView
@@ -60,15 +59,25 @@
 
     <Button
         android:id="@+id/main_set_image_choose_button"
-        android:text="@string/main_set_image_choose_button_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:text="@string/main_set_image_choose_button_text"
 
         app:layout_constraintTop_toBottomOf="@+id/main_set_image_data"
         tools:layout_editor_absoluteX="16dp" />
 
+    <Button
+        android:id="@+id/main_set_apply_wallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/main_set_apply_wallpaper_button_text"
+
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
