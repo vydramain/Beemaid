@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
                 result !== null -> {
                     mainSetEditText.setText(result.toString())
                     mainSetImagePreview.setImageURI(result)
+                    mainSetApplyWallpapersButton.isEnabled = true
                 }
             }
 
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
             actionGetContentActivityLauncher.launch(0)
         }
 
+        mainSetApplyWallpapersButton.isEnabled = false
         mainSetApplyWallpapersButton.setOnClickListener {
             try {
                 wallpaperManager.setBitmap(mainSetImagePreview.drawable.current.toBitmap())
