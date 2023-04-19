@@ -5,6 +5,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.app.WallpaperManager
+import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
@@ -51,7 +52,11 @@ class MainActivity : AppCompatActivity() {
             try {
                 wallpaperManager.setBitmap(mainSetImagePreview.drawable.current.toBitmap())
             } catch (e: Exception) {
-                e.printStackTrace()
+                Toast.makeText(
+                    applicationContext,
+                    R.string.toast_cant_set_wallpaper_message,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

@@ -6,4 +6,5 @@
     <string name="main_set_image_path">Image path</string>
     <string name="main_set_image_choose_button_text">Choose image</string>
     <string name="main_set_apply_wallpaper_button_text">Apply wallpaper</string>
+    <string name="toast_cant_set_wallpaper_message">Can\'t set wallpaper</string>
 </resources>
