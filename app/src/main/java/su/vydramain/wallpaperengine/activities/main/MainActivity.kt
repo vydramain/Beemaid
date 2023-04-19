@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         wallpaperManager = WallpaperManager.getInstance(applicationContext)
 
         mainSetEditText = findViewById<EditText>(R.id.main_set_image_path)
-        mainSetImagePreview = findViewById<ImageView>(R.id.main_set_image_preview)
+        mainSetImagePreview = findViewById<ImageView>(R.id.main_set_image_setting)
         mainSetImageChooseButton = findViewById<Button>(R.id.main_set_image_choose_button)
         mainSetApplyWallpapersButton = findViewById<Button>(R.id.main_set_apply_wallpaper_button)
 

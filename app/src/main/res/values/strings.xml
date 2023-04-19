@@ -10,4 +10,7 @@
     <string name="main_set_image_time_duration_title">Time</string>
     <string name="main_set_image_time_duration_button_add_description">Add time button</string>
     <string name="main_set_image_time_duration_button_remove_description">Remove time button</string>
+    <string name="main_set_image_transition_duration_title">Transition</string>
+    <string name="main_set_image_transition_duration_button_add_description">Add transition button</string>
+    <string name="main_set_image_transition_duration_button_remove_description">Remove transition button</string>
 </resources>
