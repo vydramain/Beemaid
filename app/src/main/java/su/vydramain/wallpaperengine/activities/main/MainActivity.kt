@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.app.WallpaperManager
+
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toBitmap
 
 import su.vydramain.wallpaperengine.R
 import su.vydramain.wallpaperengine.activities.contracts.ActionGetContentContract
@@ -13,6 +16,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mainSetEditText: EditText
     private lateinit var mainSetImagePreview: ImageView
+    private lateinit var mainSetImageChooseButton: Button
+    private lateinit var mainSetApplyWallpapersButton: Button
+
+    private lateinit var wallpaperManager: WallpaperManager
 
     private val actionGetContentActivityLauncher =
         registerForActivityResult(ActionGetContentContract()) { result ->
@@ -29,12 +36,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        wallpaperManager = WallpaperManager.getInstance(applicationContext)
+
         mainSetEditText = findViewById<EditText>(R.id.main_set_image_path)
         mainSetImagePreview = findViewById<ImageView>(R.id.main_set_image_preview)
+        mainSetImageChooseButton = findViewById<Button>(R.id.main_set_image_choose_button)
+        mainSetApplyWallpapersButton = findViewById<Button>(R.id.main_set_apply_wallpaper_button)
 
-        val mainSetImageChooseButton = findViewById<Button>(R.id.main_set_image_choose_button)
         mainSetImageChooseButton.setOnClickListener {
             actionGetContentActivityLauncher.launch(0)
+        }
+
+        mainSetApplyWallpapersButton.setOnClickListener {
+            try {
+                wallpaperManager.setBitmap(mainSetImagePreview.drawable.current.toBitmap())
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 }

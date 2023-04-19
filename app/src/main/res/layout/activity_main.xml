@@ -39,7 +39,6 @@
             android:name="main_set_image_path"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/main_set_image_path"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/main_set_image_title" />
@@ -70,7 +69,7 @@
         tools:layout_editor_absoluteX="16dp" />
 
     <Button
-        android:id="@+id/main_set_apply_wallpaper"
+        android:id="@+id/main_set_apply_wallpaper_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

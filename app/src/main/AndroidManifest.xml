@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Access permission to set the wallpaper -->
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+
     <application
         android:name="su.vydramain.appwrap.AppWrap"
         android:allowBackup="true"
@@ -20,9 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.second.SideActivity"
-            android:exported="true" />
     </application>
 
 </manifest>
