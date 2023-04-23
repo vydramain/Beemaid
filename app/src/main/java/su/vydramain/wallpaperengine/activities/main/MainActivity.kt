@@ -1,38 +1,37 @@
 package su.vydramain.wallpaperengine.activities.main
 
-import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
 import android.app.WallpaperManager
-import android.widget.Toast
-
+import android.os.Bundle
+import android.view.KeyEvent
+import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.drawable.toBitmap
-
 import su.vydramain.wallpaperengine.R
-import su.vydramain.wallpaperengine.activities.contracts.ActionGetContentContract
+import su.vydramain.wallpaperengine.activities.wallpaperpreview.WallpaperPreview
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mainSetEditText: EditText
-    private lateinit var mainSetImagePreview: ImageView
-    private lateinit var mainSetImageChooseButton: Button
     private lateinit var mainSetApplyWallpapersButton: Button
+    private lateinit var mainSetWallpapersPreviewList: ListView
+    private lateinit var mainSetAddWallpaperPreviewButton: Button
+
+    private lateinit var wallpaperPreview: WallpaperPreview
 
     private lateinit var wallpaperManager: WallpaperManager
 
-    private val actionGetContentActivityLauncher =
-        registerForActivityResult(ActionGetContentContract()) { result ->
-            when {
-                result !== null -> {
-                    mainSetEditText.setText(result.toString())
-                    mainSetImagePreview.setImageURI(result)
-                    mainSetApplyWallpapersButton.isEnabled = true
-                }
-            }
-
-        }
+//    private val actionGetContentActivityLauncher =
+//        registerForActivityResult(ActionGetContentContract()) { result ->
+//            when {
+//                result !== null -> {
+//                    mainSetEditText.setText(result.toString())
+//                    mainSetImagePreview.setImageURI(result)
+//                    mainSetApplyWallpapersButton.isEnabled = true
+//                }
+//            }
+//
+//        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,26 +39,55 @@ class MainActivity : AppCompatActivity() {
 
         wallpaperManager = WallpaperManager.getInstance(applicationContext)
 
-        mainSetEditText = findViewById<EditText>(R.id.main_set_image_path)
-        mainSetImagePreview = findViewById<ImageView>(R.id.main_set_image_setting)
-        mainSetImageChooseButton = findViewById<Button>(R.id.main_set_image_choose_button)
-        mainSetApplyWallpapersButton = findViewById<Button>(R.id.main_set_apply_wallpaper_button)
+        mainSetApplyWallpapersButton = findViewById(R.id.main_set_apply_wallpaper_button)
+        mainSetWallpapersPreviewList = findViewById(R.id.main_set_wallpapers_preview_list)
+        mainSetAddWallpaperPreviewButton = findViewById(R.id.main_set_add_wallpaper_preview_button)
 
-        mainSetImageChooseButton.setOnClickListener {
-            actionGetContentActivityLauncher.launch(0)
-        }
+        wallpaperPreview = WallpaperPreview(
+            findViewById(R.id.wallpaper_preview_path),
+            findViewById(R.id.wallpaper_preview_image),
+            findViewById(R.id.wallpaper_preview_choose_image_button)
+        )
 
-        mainSetApplyWallpapersButton.isEnabled = false
-        mainSetApplyWallpapersButton.setOnClickListener {
-            try {
-                wallpaperManager.setBitmap(mainSetImagePreview.drawable.current.toBitmap())
-            } catch (e: Exception) {
-                Toast.makeText(
-                    applicationContext,
-                    R.string.toast_cant_set_wallpaper_message,
-                    Toast.LENGTH_SHORT
-                ).show()
+//        mainSetImageChooseButton.setOnClickListener {
+//            actionGetContentActivityLauncher.launch(0)
+//        }
+
+//        mainSetApplyWallpapersButton.isEnabled = false
+//        mainSetApplyWallpapersButton.setOnClickListener {
+//            try {
+//                wallpaperManager.setBitmap(mainSetImagePreview.drawable.current.toBitmap())
+//            } catch (e: Exception) {
+//                Toast.makeText(
+//                    applicationContext,
+//                    R.string.toast_cant_set_wallpaper_message,
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            }
+//        }
+
+        // Создаём пустой массив для хранения имен котов
+        val previews: ArrayList<WallpaperPreview> = ArrayList()
+
+        val previewsAdapter: ArrayAdapter<WallpaperPreview> =
+            ArrayAdapter<WallpaperPreview>(
+                this,
+                R.layout.wallpaper_preview_list_item,
+                previews
+            )
+
+        mainSetWallpapersPreviewList.adapter = previewsAdapter
+
+        mainSetAddWallpaperPreviewButton.setOnKeyListener(object : OnKeyListener() {
+            fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
+                if (event.getAction() === KeyEvent.ACTION_DOWN) if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    previews.add(0, editText.getText().toString())
+                    previewsAdapter.notifyDataSetChanged()
+                    editText.setText("")
+                    return true
+                }
+                return false
             }
-        }
+        })
     }
 }

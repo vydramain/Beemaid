@@ -10,193 +10,40 @@
     android:paddingBottom="1dp"
     tools:context=".activities.main.MainActivity">
 
+    <ListView
+        android:id="@+id/main_set_wallpapers_preview_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
-        android:id="@+id/main_set_image_data_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:orientation="vertical"
-        tools:ignore="MissingConstraints">
 
-        <LinearLayout
-            android:id="@+id/main_set_image_data_settings_wrapper"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/main_set_image_settings"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/main_set_image_title"
-                    android:name="main_set_image_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/main_set_image_title" />
-
-                <EditText
-                    android:id="@+id/main_set_image_path"
-                    android:name="main_set_image_path"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autofillHints="no"
-                    android:inputType="text"
-
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/main_set_image_title"
-                    tools:ignore="LabelFor" />
-
-                <LinearLayout
-                    android:id="@+id/main_set_image_time_duration_wrapper"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/main_set_image_time_duration_title"
-                        android:layout_width="70dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/main_set_image_time_duration_title"
-
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/main_set_image_time_duration_input"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <EditText
-                        android:id="@+id/main_set_image_time_duration_input"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:autofillHints="no"
-                        android:inputType="text" />
-
-                    <LinearLayout
-                        android:id="@+id/main_set_image_time_duration_buttons"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <ImageButton
-                            android:id="@+id/main_set_image_time_duration_button_add"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:adjustViewBounds="true"
-                            android:contentDescription="@string/main_set_image_time_duration_button_add_description"
-                            android:scaleType="fitCenter"
-
-                            app:srcCompat="@drawable/add" />
-
-                        <ImageButton
-                            android:id="@+id/main_set_image_time_duration_button_remove"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:adjustViewBounds="true"
-                            android:contentDescription="@string/main_set_image_time_duration_button_remove_description"
-                            android:scaleType="fitCenter"
-
-                            app:srcCompat="@drawable/remove" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/main_set_image_transition_duration_wrapper"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/main_set_image_transition_duration_title"
-                        android:layout_width="70dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/main_set_image_transition_duration_title" />
-
-                    <EditText
-                        android:id="@+id/main_set_image_transition_duration_input"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:autofillHints="no"
-                        android:inputType="text" />
-
-                    <LinearLayout
-                        android:id="@+id/main_set_image_transition_duration_buttons"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <ImageButton
-                            android:id="@+id/main_set_image_transition_duration_button_add"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:adjustViewBounds="true"
-                            android:contentDescription="@string/main_set_image_transition_duration_button_add_description"
-                            android:scaleType="fitCenter"
-
-                            app:srcCompat="@drawable/add" />
-
-                        <ImageButton
-                            android:id="@+id/main_set_image_transition_duration_button_remove"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:adjustViewBounds="true"
-                            android:contentDescription="@string/main_set_image_transition_duration_button_remove_description"
-                            android:scaleType="fitCenter"
-
-                            app:srcCompat="@drawable/remove" />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/main_set_image_setting"
-                android:layout_width="72dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:contentDescription="@string/main_set_image_preview_description"
-
-                app:srcCompat="@android:drawable/ic_menu_gallery" />
-        </LinearLayout>
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
-            android:id="@+id/main_set_image_choose_button"
+            android:id="@+id/main_set_add_wallpaper_preview_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/main_set_image_choose_button_text"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Добавить элемент в список"
 
-            tools:layout_editor_absoluteX="16dp" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <Button
+            android:id="@+id/main_set_apply_wallpaper_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/main_set_apply_wallpaper_button_text"
+
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/main_set_apply_wallpaper_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/main_set_apply_wallpaper_button_text"
-
-        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

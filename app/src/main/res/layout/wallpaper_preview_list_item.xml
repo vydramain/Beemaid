@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/wallpaper_preview_list_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="16dp"
+    android:gravity="center_vertical"
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"
+    android:orientation="vertical"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd" >
+
+    <LinearLayout
+        android:id="@+id/wallpaper_preview_settings_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/wallpaper_preview_settings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/wallpaper_preview_title"
+                android:name="wallpaper_preview_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/wallpaper_preview_title" />
+
+            <EditText
+                android:id="@+id/wallpaper_preview_path"
+                android:name="wallpaper_preview_path"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="no"
+                android:inputType="text"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/wallpaper_preview_title" />
+
+            <LinearLayout
+                android:id="@+id/wallpaper_preview_duration_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/wallpaper_preview_duration_title"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wallpaper_preview_duration_title"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/wallpaper_preview_duration_input"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/wallpaper_preview_duration_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:autofillHints="no"
+                    android:inputType="text" />
+
+                <LinearLayout
+                    android:id="@+id/wallpaper_preview_duration_buttons_wrapper"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/wallpaper_preview_duration_button_add"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/wallpaper_preview_duration_button_add_description"
+                        android:scaleType="fitCenter"
+
+                        app:srcCompat="@drawable/add" />
+
+                    <ImageButton
+                        android:id="@+id/wallpaper_preview_duration_button_remove"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/wallpaper_preview_duration_button_remove_description"
+                        android:scaleType="fitCenter"
+
+                        app:srcCompat="@drawable/remove" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/wallpaper_preview_transition_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/wallpaper_preview_transition__title"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wallpaper_preview_transition_title" />
+
+                <EditText
+                    android:id="@+id/wallpaper_preview_transition_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:autofillHints="no"
+                    android:inputType="text" />
+
+                <LinearLayout
+                    android:id="@+id/wallpaper_preview_transition_buttons_wrapper"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/wallpaper_preview_transition_button_add"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/wallpaper_preview_transition_button_add_description"
+                        android:scaleType="fitCenter"
+
+                        app:srcCompat="@drawable/add" />
+
+                    <ImageButton
+                        android:id="@+id/wallpaper_preview_transition_button_remove"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/wallpaper_preview_transition_button_remove_description"
+                        android:scaleType="fitCenter"
+
+                        app:srcCompat="@drawable/remove" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/wallpaper_preview_image"
+            android:layout_width="72dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/wallpaper_preview_image_description"
+
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/wallpaper_preview_choose_image_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/wallpaper_preview_choose_image_button_text" />
+</LinearLayout>
