@@ -10,10 +10,18 @@
     android:paddingBottom="1dp"
     tools:context=".activities.main.MainActivity">
 
-    <ListView
-        android:id="@+id/main_set_wallpapers_preview_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <su.vydramain.wallpaperengine.activities.customview.WallpaperPreView.WallpaperPreView
+        android:id="@+id/main_set_wallpaper_preview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="16dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,8 +38,7 @@
             android:layout_marginEnd="16dp"
             android:text="Добавить элемент в список"
 
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/main_set_apply_wallpaper_button"
@@ -42,8 +49,7 @@
             android:layout_marginBottom="16dp"
             android:text="@string/main_set_apply_wallpaper_button_text"
 
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
