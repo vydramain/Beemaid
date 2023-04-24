@@ -1,20 +1,28 @@
 package su.vydramain.wallpaperengine.activities.main
 
-import android.app.WallpaperManager
 import android.os.Bundle
+
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
+import android.app.WallpaperManager
+
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toBitmap
+
 import su.vydramain.wallpaperengine.R
 import su.vydramain.wallpaperengine.activities.contracts.ActionGetContentContract
+import su.vydramain.wallpaperengine.activities.customview.WallpaperPreView.WallpaperPreView
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mainSetEditText: EditText
-    private lateinit var mainSetImagePreview: ImageView
-    private lateinit var mainSetImageChooseButton: Button
+    private lateinit var wallpaperPreviewEditText: EditText
+    private lateinit var wallpaperPreviewImagePreview: ImageView
+    private lateinit var wallpaperPreviewImageChooseButton: Button
+
     private lateinit var mainSetApplyWallpapersButton: Button
+    private lateinit var mainSetWallpaperPreView: WallpaperPreView
 
     private lateinit var wallpaperManager: WallpaperManager
 
@@ -22,8 +30,8 @@ class MainActivity : AppCompatActivity() {
         registerForActivityResult(ActionGetContentContract()) { result ->
             when {
                 result !== null -> {
-                    mainSetEditText.setText(result.toString())
-                    mainSetImagePreview.setImageURI(result)
+                    wallpaperPreviewEditText.setText(result.toString())
+                    wallpaperPreviewImagePreview.setImageURI(result)
                     mainSetApplyWallpapersButton.isEnabled = true
                 }
             }
@@ -36,26 +44,31 @@ class MainActivity : AppCompatActivity() {
 
         wallpaperManager = WallpaperManager.getInstance(applicationContext)
 
-//        mainSetEditText = findViewById<EditText>(R.id.wallpaper_settings_path)
-//        mainSetImagePreview = findViewById<ImageView>(R.id.wallpaper_preview)
-//        mainSetImageChooseButton = findViewById<Button>(R.id.wallpaper_choose_button)
-        mainSetApplyWallpapersButton = findViewById<Button>(R.id.main_set_apply_wallpaper_button)
+        mainSetWallpaperPreView = findViewById(R.id.main_set_wallpaper_preview)
 
-//        mainSetImageChooseButton.setOnClickListener {
-//            actionGetContentActivityLauncher.launch(0)
-//        }
+        wallpaperPreviewEditText =
+            mainSetWallpaperPreView.findViewById(R.id.wallpaper_settings_path)
+        wallpaperPreviewImagePreview = mainSetWallpaperPreView.findViewById(R.id.wallpaper_preview)
+        wallpaperPreviewImageChooseButton =
+            mainSetWallpaperPreView.findViewById(R.id.wallpaper_choose_button)
+
+        mainSetApplyWallpapersButton = findViewById(R.id.main_set_apply_wallpaper_button)
+
+        wallpaperPreviewImageChooseButton.setOnClickListener {
+            actionGetContentActivityLauncher.launch(0)
+        }
 
         mainSetApplyWallpapersButton.isEnabled = false
-//        mainSetApplyWallpapersButton.setOnClickListener {
-//            try {
-//                wallpaperManager.setBitmap(mainSetImagePreview.drawable.current.toBitmap())
-//            } catch (e: Exception) {
-//                Toast.makeText(
-//                    applicationContext,
-//                    R.string.toast_cant_set_wallpaper_message,
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            }
-//        }
+        mainSetApplyWallpapersButton.setOnClickListener {
+            try {
+                wallpaperManager.setBitmap(wallpaperPreviewImagePreview.drawable.current.toBitmap())
+            } catch (e: Exception) {
+                Toast.makeText(
+                    applicationContext,
+                    R.string.toast_cant_set_wallpaper_message,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 }

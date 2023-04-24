@@ -11,6 +11,7 @@
     tools:context=".activities.main.MainActivity">
 
     <su.vydramain.wallpaperengine.activities.customview.WallpaperPreView.WallpaperPreView
+        android:id="@+id/main_set_wallpaper_preview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
