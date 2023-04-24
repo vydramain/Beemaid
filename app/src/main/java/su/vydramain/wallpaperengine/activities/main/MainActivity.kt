@@ -1,15 +1,11 @@
 package su.vydramain.wallpaperengine.activities.main
 
+import android.app.WallpaperManager
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.app.WallpaperManager
-import android.widget.Toast
-
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.drawable.toBitmap
-
 import su.vydramain.wallpaperengine.R
 import su.vydramain.wallpaperengine.activities.contracts.ActionGetContentContract
 
@@ -40,26 +36,26 @@ class MainActivity : AppCompatActivity() {
 
         wallpaperManager = WallpaperManager.getInstance(applicationContext)
 
-        mainSetEditText = findViewById<EditText>(R.id.main_set_image_path)
-        mainSetImagePreview = findViewById<ImageView>(R.id.main_set_image_setting)
-        mainSetImageChooseButton = findViewById<Button>(R.id.main_set_image_choose_button)
+//        mainSetEditText = findViewById<EditText>(R.id.wallpaper_settings_path)
+//        mainSetImagePreview = findViewById<ImageView>(R.id.wallpaper_preview)
+//        mainSetImageChooseButton = findViewById<Button>(R.id.wallpaper_choose_button)
         mainSetApplyWallpapersButton = findViewById<Button>(R.id.main_set_apply_wallpaper_button)
 
-        mainSetImageChooseButton.setOnClickListener {
-            actionGetContentActivityLauncher.launch(0)
-        }
+//        mainSetImageChooseButton.setOnClickListener {
+//            actionGetContentActivityLauncher.launch(0)
+//        }
 
         mainSetApplyWallpapersButton.isEnabled = false
-        mainSetApplyWallpapersButton.setOnClickListener {
-            try {
-                wallpaperManager.setBitmap(mainSetImagePreview.drawable.current.toBitmap())
-            } catch (e: Exception) {
-                Toast.makeText(
-                    applicationContext,
-                    R.string.toast_cant_set_wallpaper_message,
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
+//        mainSetApplyWallpapersButton.setOnClickListener {
+//            try {
+//                wallpaperManager.setBitmap(mainSetImagePreview.drawable.current.toBitmap())
+//            } catch (e: Exception) {
+//                Toast.makeText(
+//                    applicationContext,
+//                    R.string.toast_cant_set_wallpaper_message,
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            }
+//        }
     }
 }

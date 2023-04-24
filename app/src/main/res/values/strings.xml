@@ -1,16 +1,16 @@
 <resources>
     <string name="app_name">Wallpaper Engine</string>
     <string name="activity_side_et_submit_button">OK</string>
-    <string name="main_set_image_title">Set your image:</string>
-    <string name="main_set_image_preview_description">Image preview</string>
+    <string name="wallpaper_settings_title">Set your image:</string>
+    <string name="wallpaper_preview_description">Image preview</string>
     <string name="main_set_image_path">Image path</string>
-    <string name="main_set_image_choose_button_text">Choose image</string>
+    <string name="wallpaper_choose_button_text">Choose image</string>
     <string name="main_set_apply_wallpaper_button_text">Apply wallpaper</string>
     <string name="toast_cant_set_wallpaper_message">Can\'t set wallpaper</string>
-    <string name="main_set_image_time_duration_title">Time</string>
-    <string name="main_set_image_time_duration_button_add_description">Add time button</string>
-    <string name="main_set_image_time_duration_button_remove_description">Remove time button</string>
-    <string name="main_set_image_transition_duration_title">Transition</string>
-    <string name="main_set_image_transition_duration_button_add_description">Add transition button</string>
-    <string name="main_set_image_transition_duration_button_remove_description">Remove transition button</string>
+    <string name="wallpaper_settings_duration_title">Time</string>
+    <string name="wallpaper_settings_duration_button_add_description">Add time button</string>
+    <string name="wallpaper_settings_duration_button_remove_description">Remove time button</string>
+    <string name="wallpaper_settings_transition_title">Transition</string>
+    <string name="wallpaper_settings_transition_button_add_description">Add transition button</string>
+    <string name="wallpaper_settings_transition_button_remove_description">Remove transition button</string>
 </resources>
