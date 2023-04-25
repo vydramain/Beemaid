@@ -1,4 +1,4 @@
-package su.vydramain.wallpaperengine.activities.customview.WallpaperPreView
+package su.vydramain.wallpaperengine.views.WallpaperPreView
 
 import android.content.Context
 import android.util.AttributeSet

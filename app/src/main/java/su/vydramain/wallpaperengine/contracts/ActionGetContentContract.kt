@@ -1,4 +1,4 @@
-package su.vydramain.wallpaperengine.activities.contracts
+package su.vydramain.wallpaperengine.contracts
 
 import android.net.Uri
 import android.content.Intent

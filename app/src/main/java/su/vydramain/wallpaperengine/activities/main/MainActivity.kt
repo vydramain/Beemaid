@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 
 import su.vydramain.wallpaperengine.R
-import su.vydramain.wallpaperengine.activities.contracts.ActionGetContentContract
-import su.vydramain.wallpaperengine.activities.customview.WallpaperPreView.WallpaperPreView
+import su.vydramain.wallpaperengine.contracts.ActionGetContentContract
+import su.vydramain.wallpaperengine.views.WallpaperPreView.WallpaperPreView
 
 class MainActivity : AppCompatActivity() {
 
