@@ -1,7 +1,9 @@
 package su.vydramain.wallpaperengine.activities.main
 
+import android.app.WallpaperManager
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +15,7 @@ import su.vydramain.wallpaperengine.models.WallpaperListViewModel
 import su.vydramain.wallpaperengine.models.WallpaperListViewModelFactory
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var wallpaperManager: WallpaperManager
     private lateinit var mainSetApplyWallpapersButton: Button
 
     private val actionGetContentActivityLauncher =
@@ -35,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mainSetApplyWallpapersButton = findViewById(R.id.main_set_apply_wallpaper_button)
+        mainSetApplyWallpapersButton.setOnClickListener { applyWallpapers() }
         mainSetApplyWallpapersButton.isEnabled = false
 
 //      Instantiates wallpapersAdapter. Both adapters are added to concatAdapter.
@@ -60,5 +64,17 @@ class MainActivity : AppCompatActivity() {
     //  Opens WallpaperDetailActivity when RecyclerView item is clicked.
     private fun adapterOnClick(wallpaper: Wallpaper) {
         actionGetContentActivityLauncher.launch(0)
+    }
+
+    private fun applyWallpapers() {
+        try {
+//            wallpaperManager.setBitmap(wallpaperPreviewImagePreview.drawable.current.toBitmap())
+        } catch (e: Exception) {
+            Toast.makeText(
+                applicationContext,
+                R.string.toast_cant_set_wallpaper_message,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 }

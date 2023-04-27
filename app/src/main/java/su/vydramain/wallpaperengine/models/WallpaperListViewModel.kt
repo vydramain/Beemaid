@@ -1,6 +1,7 @@
 package su.vydramain.wallpaperengine.models
 
 import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import su.vydramain.wallpaperengine.data.Wallpaper
@@ -20,7 +21,7 @@ class WallpaperListViewModel(val dataSource: WallpaperDataSource) : ViewModel() 
             Wallpaper(
                 Random.nextLong(),
                 wallpaperPath,
-                0
+                Uri.EMPTY
             )
         )
     }

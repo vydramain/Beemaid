@@ -1,5 +1,6 @@
 package su.vydramain.wallpaperengine.adapters
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,9 +19,9 @@ class WallpapersAdapter(private val onClick: (Wallpaper) -> Unit) :
     //  ViewHolder for Wallpaper, takes in the inflated view and the onClick behavior.
     class WallpapersPreViewHolder(itemView: View, val onClick: (Wallpaper) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
-        private var wallpaperPreviewEditText: TextView =
+        private var wallpaperPreviewPath: TextView =
             itemView.findViewById(R.id.wallpaper_settings_path)
-        private var wallpaperPreviewImagePreview: ImageView =
+        private var wallpaperPreviewImage: ImageView =
             itemView.findViewById(R.id.wallpaper_preview)
         private var wallpaperPreviewImageChooseButton: Button =
             itemView.findViewById(R.id.wallpaper_choose_button)
@@ -30,12 +31,11 @@ class WallpapersAdapter(private val onClick: (Wallpaper) -> Unit) :
         fun bind(wallpaper: Wallpaper) {
             currentWallpaperPreview = wallpaper
 
-            wallpaperPreviewEditText.text = wallpaper.path
-
-            if (wallpaper.image != null) {
-                wallpaperPreviewImagePreview.setImageResource(wallpaper.image)
+            wallpaperPreviewPath.text = wallpaper.path
+            if (Uri.EMPTY != wallpaper.imageUri) {
+                wallpaperPreviewImage.setImageURI(wallpaper.imageUri)
             } else {
-                wallpaperPreviewImagePreview.setImageResource(R.drawable.ic_menu_gallery)
+                wallpaperPreviewImage.setImageResource(R.drawable.ic_menu_gallery)
             }
 
             wallpaperPreviewImageChooseButton.setOnClickListener {
