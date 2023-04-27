@@ -11,16 +11,16 @@ class WallpaperListViewModel(val dataSource: WallpaperDataSource) : ViewModel() 
     val wallpapersLiveData = dataSource.getWallpaperList()
 
     //  If the name and description are present, create new Wallpaper and add it to the datasource
-    fun insertWallpaper(wallpaperName: String?, wallpaperDescription: String?) {
-        if (wallpaperName == null || wallpaperDescription == null) {
+    fun insertWallpaper(wallpaperPath: String?) {
+        if (wallpaperPath == null) {
             return
         }
 
         dataSource.addWallpaper(
             Wallpaper(
                 Random.nextLong(),
-                "",
-                dataSource.getRandomWallpaperImageAsset(),
+                wallpaperPath,
+                0
             )
         )
     }

@@ -6,5 +6,4 @@ class Wallpaper(
     val id: Long,
     val path: String,
     @DrawableRes val image: Int?
-) {
-}
+)

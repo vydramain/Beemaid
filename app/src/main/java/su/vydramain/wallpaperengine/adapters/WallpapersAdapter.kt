@@ -15,7 +15,7 @@ import su.vydramain.wallpaperengine.data.Wallpaper
 class WallpapersAdapter(private val onClick: (Wallpaper) -> Unit) :
     ListAdapter<Wallpaper, WallpapersAdapter.WallpapersPreViewHolder>(WallpaperDiffCallback) {
 
-//  ViewHolder for Wallpaper, takes in the inflated view and the onClick behavior.
+    //  ViewHolder for Wallpaper, takes in the inflated view and the onClick behavior.
     class WallpapersPreViewHolder(itemView: View, val onClick: (Wallpaper) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         private var wallpaperPreviewEditText: TextView =
@@ -26,15 +26,7 @@ class WallpapersAdapter(private val onClick: (Wallpaper) -> Unit) :
             itemView.findViewById(R.id.wallpaper_choose_button)
         private var currentWallpaperPreview: Wallpaper? = null
 
-        init {
-            itemView.setOnClickListener {
-                currentWallpaperPreview?.let {
-                        onClick(it)
-                }
-            }
-        }
-
-//      Bind wallpaper path and image.
+        //      Bind wallpaper path and image.
         fun bind(wallpaper: Wallpaper) {
             currentWallpaperPreview = wallpaper
 
@@ -47,12 +39,14 @@ class WallpapersAdapter(private val onClick: (Wallpaper) -> Unit) :
             }
 
             wallpaperPreviewImageChooseButton.setOnClickListener {
-//                actionGetContentActivityLauncher.launch(0)
+                currentWallpaperPreview?.let {
+                    onClick(it)
+                }
             }
         }
     }
 
-//  Creates and inflates view and return WallpaperPreViewHolder.
+    //  Creates and inflates view and return WallpaperPreViewHolder.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WallpapersPreViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.wallpaper_pre_view, parent, false)
@@ -60,7 +54,7 @@ class WallpapersAdapter(private val onClick: (Wallpaper) -> Unit) :
         return WallpapersPreViewHolder(view, onClick)
     }
 
-//  Gets current wallpaper and uses it to bind view.
+    //  Gets current wallpaper and uses it to bind view.
     override fun onBindViewHolder(holder: WallpapersPreViewHolder, position: Int) {
         holder.bind(getItem(position))
     }

@@ -1,7 +1,6 @@
 package su.vydramain.wallpaperengine.activities.main
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -13,8 +12,6 @@ import su.vydramain.wallpaperengine.data.Wallpaper
 import su.vydramain.wallpaperengine.models.WallpaperListViewModel
 import su.vydramain.wallpaperengine.models.WallpaperListViewModelFactory
 
-const val WALLPAPER_ID = "wallpaper id"
-
 class MainActivity : AppCompatActivity() {
     private lateinit var mainSetApplyWallpapersButton: Button
 
@@ -24,7 +21,6 @@ class MainActivity : AppCompatActivity() {
                 result !== null -> {
 //                    wallpaperPreviewEditText.setText(result.toString())
 //                    wallpaperPreviewImagePreview.setImageURI(result)
-                    mainSetApplyWallpapersButton.isEnabled = true
                 }
             }
 
@@ -48,24 +44,21 @@ class MainActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.main_set_wallpaper_recycler_view)
         recyclerView.adapter = wallpapersAdapter
 
-        wallpapersListViewModel.wallpapersLiveData.observe(this, {
+        wallpapersListViewModel.wallpapersLiveData.observe(this) {
             it?.let {
                 wallpapersAdapter.submitList(it as MutableList<Wallpaper>)
             }
-        })
+        }
 
-        val fab: View = findViewById(R.id.main_set_add_wallpaper_preview_button)
-        fab.setOnClickListener {
-            addWallpaperPreviewButtonOnClick()
+        val addWallpaperPreviewButton: Button =
+            findViewById(R.id.main_set_add_wallpaper_preview_button)
+        addWallpaperPreviewButton.setOnClickListener {
+            wallpapersListViewModel.insertWallpaper("")
         }
     }
 
-    /* Opens WallpaperDetailActivity when RecyclerView item is clicked. */
+    //  Opens WallpaperDetailActivity when RecyclerView item is clicked.
     private fun adapterOnClick(wallpaper: Wallpaper) {
         actionGetContentActivityLauncher.launch(0)
-    }
-
-    /* Adds flower to flowerList when FAB is clicked. */
-    private fun addWallpaperPreviewButtonOnClick() {
     }
 }
