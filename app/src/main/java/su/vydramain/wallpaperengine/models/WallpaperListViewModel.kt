@@ -16,14 +16,13 @@ class WallpaperListViewModel(val dataSource: WallpaperDataSource) : ViewModel() 
             return
         }
 
-        val image = dataSource.getRandomWallpaperImageAsset()
-        val newWallpaper = Wallpaper(
-            Random.nextLong(),
-            "",
-            image,
+        dataSource.addWallpaper(
+            Wallpaper(
+                Random.nextLong(),
+                "",
+                dataSource.getRandomWallpaperImageAsset(),
+            )
         )
-
-        dataSource.addWallpaper(newWallpaper)
     }
 }
 

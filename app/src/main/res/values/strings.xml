@@ -13,4 +13,6 @@
     <string name="wallpaper_settings_transition_title">Transition</string>
     <string name="wallpaper_settings_transition_button_add_description">Add transition button</string>
     <string name="wallpaper_settings_transition_button_remove_description">Remove transition button</string>
+    <string name="header_wallpapers_string">Wallpapers</string>
+    <string name="header_wallpaper_finder_string">Wallpaper finder</string>
 </resources>
