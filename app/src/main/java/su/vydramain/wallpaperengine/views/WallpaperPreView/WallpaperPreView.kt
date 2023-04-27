@@ -18,8 +18,8 @@ class WallpaperPreView(context: Context, attrs: AttributeSet) : ConstraintLayout
     init {
         View.inflate(context, R.layout.wallpaper_pre_view, this)
 
-        editText = findViewById<EditText>(R.id.wallpaper_settings_path)
-        imagePreview = findViewById<ImageView>(R.id.wallpaper_preview)
-        imageChooseButton = findViewById<Button>(R.id.wallpaper_choose_button)
+        editText = findViewById(R.id.wallpaper_settings_path)
+        imagePreview = findViewById(R.id.wallpaper_preview)
+        imageChooseButton = findViewById(R.id.wallpaper_choose_button)
     }
 }

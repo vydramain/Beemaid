@@ -1,28 +1,27 @@
 package su.vydramain.wallpaperengine.activities.main
 
-import android.os.Bundle
-
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
 import android.app.WallpaperManager
-
+import android.os.Bundle
+import android.widget.Button
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.drawable.toBitmap
-
+import androidx.recyclerview.widget.ConcatAdapter
+import androidx.recyclerview.widget.RecyclerView
 import su.vydramain.wallpaperengine.R
+import su.vydramain.wallpaperengine.adapters.WallpapersAdapter
 import su.vydramain.wallpaperengine.contracts.ActionGetContentContract
-import su.vydramain.wallpaperengine.views.WallpaperPreView.WallpaperPreView
+import su.vydramain.wallpaperengine.data.Wallpaper
+import su.vydramain.wallpaperengine.models.WallpaperListViewModel
+import su.vydramain.wallpaperengine.models.WallpaperListViewModelFactory
+
+const val WALLPAPER_ID = "wallpaper id"
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var wallpaperPreviewEditText: EditText
-    private lateinit var wallpaperPreviewImagePreview: ImageView
-    private lateinit var wallpaperPreviewImageChooseButton: Button
+    private val wallpapersListViewModel by viewModels<WallpaperListViewModel> {
+        WallpaperListViewModelFactory(this)
+    }
 
     private lateinit var mainSetApplyWallpapersButton: Button
-    private lateinit var mainSetWallpaperPreView: WallpaperPreView
 
     private lateinit var wallpaperManager: WallpaperManager
 
@@ -30,8 +29,8 @@ class MainActivity : AppCompatActivity() {
         registerForActivityResult(ActionGetContentContract()) { result ->
             when {
                 result !== null -> {
-                    wallpaperPreviewEditText.setText(result.toString())
-                    wallpaperPreviewImagePreview.setImageURI(result)
+//                    wallpaperPreviewEditText.setText(result.toString())
+//                    wallpaperPreviewImagePreview.setImageURI(result)
                     mainSetApplyWallpapersButton.isEnabled = true
                 }
             }
@@ -42,33 +41,65 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        wallpaperManager = WallpaperManager.getInstance(applicationContext)
+        /* Instantiates headerAdapter and flowersAdapter. Both adapters are added to concatAdapter.
+which displays the contents sequentially */
+        val wallpapersAdapter = WallpapersAdapter { flower -> adapterOnClick(flower) }
+        val concatAdapter = ConcatAdapter(wallpapersAdapter)
 
-        mainSetWallpaperPreView = findViewById(R.id.main_set_wallpaper_preview)
+        val recyclerView: RecyclerView = findViewById(R.id.main_set_wallpaper_preview)
+        recyclerView.adapter = concatAdapter
 
-        wallpaperPreviewEditText =
-            mainSetWallpaperPreView.findViewById(R.id.wallpaper_settings_path)
-        wallpaperPreviewImagePreview = mainSetWallpaperPreView.findViewById(R.id.wallpaper_preview)
-        wallpaperPreviewImageChooseButton =
-            mainSetWallpaperPreView.findViewById(R.id.wallpaper_choose_button)
-
-        mainSetApplyWallpapersButton = findViewById(R.id.main_set_apply_wallpaper_button)
-
-        wallpaperPreviewImageChooseButton.setOnClickListener {
-            actionGetContentActivityLauncher.launch(0)
-        }
-
-        mainSetApplyWallpapersButton.isEnabled = false
-        mainSetApplyWallpapersButton.setOnClickListener {
-            try {
-                wallpaperManager.setBitmap(wallpaperPreviewImagePreview.drawable.current.toBitmap())
-            } catch (e: Exception) {
-                Toast.makeText(
-                    applicationContext,
-                    R.string.toast_cant_set_wallpaper_message,
-                    Toast.LENGTH_SHORT
-                ).show()
+        val wallpapersLiveData = wallpapersListViewModel.wallpapersLiveData
+        wallpapersLiveData.observe(this) {
+            val it = this
+            it.let {
+                wallpapersAdapter.submitList(it as MutableList<Wallpaper>)
             }
         }
+
+//        wallpapersListViewModel.flowersLiveData.observe(this) {
+//            it?.let {
+//                wallpapersAdapter.submitList(it as MutableList<Wallpaper>)
+//                        headerAdapter.updateFlowerCount(it.size)
+//            }
+//        }
+
+        val fab: Button = findViewById(R.id.main_set_add_wallpaper_preview_button)
+        fab.setOnClickListener {
+            fabOnClick()
+        }
+
+
+//        wallpaperManager = WallpaperManager.getInstance(applicationContext)
+
+//        mainSetApplyWallpapersButton = findViewById(R.id.main_set_apply_wallpaper_button)
+
+//        wallpaperPreviewImageChooseButton.setOnClickListener {
+//            actionGetContentActivityLauncher.launch(0)
+//        }
+
+//        mainSetApplyWallpapersButton.isEnabled = false
+//        mainSetApplyWallpapersButton.setOnClickListener {
+//            try {
+//                wallpaperManager.setBitmap(wallpaperPreviewImagePreview.drawable.current.toBitmap())
+//            } catch (e: Exception) {
+//                Toast.makeText(
+//                    applicationContext,
+//                    R.string.toast_cant_set_wallpaper_message,
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            }
+//        }
+    }
+
+    /* Opens FlowerDetailActivity when RecyclerView item is clicked. */
+    private fun adapterOnClick(wallpaper: Wallpaper) {
+        actionGetContentActivityLauncher.launch(0)
+    }
+
+    /* Adds flower to flowerList when FAB is clicked. */
+    private fun fabOnClick() {
+//        val intent = Intent(this, AddFlowerActivity::class.java)
+//        startActivityForResult(intent, newWallpaperActivityRequestCode)
     }
 }
