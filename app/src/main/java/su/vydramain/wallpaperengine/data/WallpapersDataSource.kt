@@ -4,11 +4,11 @@ import android.content.res.Resources
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
-// Handles operations on flowersLiveData and holds details about it.
-class WallpaperDataSource(resources: Resources) {
+// Handles operations on wallpapersLiveData and holds details about it.
+class WallpapersDataSource(resources: Resources) {
     private val wallpapersLiveData = MutableLiveData<List<Wallpaper>>()
 
-    //  Adds flower to liveData and posts value.
+    //  Adds wallpaper to liveData and posts value.
     fun addWallpaper(wallpaper: Wallpaper) {
         val currentList = wallpapersLiveData.value
         if (null != currentList) {
@@ -20,7 +20,7 @@ class WallpaperDataSource(resources: Resources) {
         }
     }
 
-    //  Removes flower from liveData and posts value.
+    //  Removes wallpaper from liveData and posts value.
     fun removeWallpaper(wallpaper: Wallpaper) {
         val currentList = wallpapersLiveData.value
         if (null != currentList) {
@@ -30,7 +30,7 @@ class WallpaperDataSource(resources: Resources) {
         }
     }
 
-    //  Returns flower given an ID.
+    //  Returns wallpaper given an ID.
     fun getWallpaperForId(id: Long): Wallpaper? {
         wallpapersLiveData.value?.let { wallpapers ->
             return wallpapers.firstOrNull { it.id == id }
@@ -43,11 +43,11 @@ class WallpaperDataSource(resources: Resources) {
     }
 
     companion object {
-        private var INSTANCE: WallpaperDataSource? = null
+        private var INSTANCE: WallpapersDataSource? = null
 
-        fun getDataSource(resources: Resources): WallpaperDataSource {
-            return synchronized(WallpaperDataSource::class) {
-                val newInstance = INSTANCE ?: WallpaperDataSource(resources)
+        fun getDataSource(resources: Resources): WallpapersDataSource {
+            return synchronized(WallpapersDataSource::class) {
+                val newInstance = INSTANCE ?: WallpapersDataSource(resources)
                 INSTANCE = newInstance
                 newInstance
             }

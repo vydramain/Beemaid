@@ -25,11 +25,19 @@ class WallpapersAdapter(private val onClick: (Wallpaper) -> Unit) :
             itemView.findViewById(R.id.wallpaper_preview)
         private var wallpaperPreviewImageChooseButton: Button =
             itemView.findViewById(R.id.wallpaper_choose_button)
-        private var currentWallpaperPreview: Wallpaper? = null
+        private var currentWallpaper: Wallpaper? = null
+
+        init {
+            itemView.setOnClickListener {
+                currentWallpaper?.let {
+                    onClick(it)
+                }
+            }
+        }
 
         //      Bind wallpaper path and image.
         fun bind(wallpaper: Wallpaper) {
-            currentWallpaperPreview = wallpaper
+            currentWallpaper = wallpaper
 
             wallpaperPreviewPath.text = wallpaper.path
             if (Uri.EMPTY != wallpaper.imageUri) {
@@ -39,7 +47,7 @@ class WallpapersAdapter(private val onClick: (Wallpaper) -> Unit) :
             }
 
             wallpaperPreviewImageChooseButton.setOnClickListener {
-                currentWallpaperPreview?.let {
+                currentWallpaper?.let {
                     onClick(it)
                 }
             }
