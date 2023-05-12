@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             wallpapersListViewModel.insertWallpaper("")
         }
 
-//      Instantiates wallpapersAdapter which displays the contents sequentially.
+        // Instantiates wallpapersAdapter which displays the contents sequentially.
         val wallpapersAdapter = WallpapersAdapter { wallpaper -> adapterOnClick(wallpaper) }
 
         val recyclerView: RecyclerView = findViewById(R.id.main_set_wallpaper_recycler_view)
