@@ -30,6 +30,19 @@ class WallpapersDataSource(resources: Resources) {
         }
     }
 
+    fun replaceWallpaper(wallpaper: Wallpaper) {
+        val currentList = wallpapersLiveData.value
+        if (null != currentList) {
+            currentList.forEach {
+                if (it.id == wallpaper.id) {
+                    it.path = wallpaper.path
+                    it.imageUri = wallpaper.imageUri
+                }
+            }
+            wallpapersLiveData.postValue(currentList)
+        }
+    }
+
     //  Returns wallpaper given an ID.
     fun getWallpaperForId(id: Long): Wallpaper? {
         wallpapersLiveData.value?.let { wallpapers ->

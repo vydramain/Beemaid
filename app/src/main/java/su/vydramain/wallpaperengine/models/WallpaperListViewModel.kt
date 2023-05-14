@@ -25,6 +25,10 @@ class WallpaperListViewModel(val dataSource: WallpapersDataSource) : ViewModel()
             )
         )
     }
+
+    fun updateExistWallpaper(wallpaper: Wallpaper) {
+        dataSource.replaceWallpaper(wallpaper)
+    }
 }
 
 class WallpaperListViewModelFactory(private val context: Context) : ViewModelProvider.Factory {

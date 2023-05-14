@@ -1,7 +1,6 @@
 package su.vydramain.wallpaperengine.activities.main
 
 import android.app.WallpaperManager
-import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -26,12 +25,12 @@ class MainActivity : AppCompatActivity() {
         WallpaperListViewModelFactory(this)
     }
 
-    private var tmpWallpaper = Wallpaper(0, "", Uri.parse(""))
+    private var tmpWallpaperId: Long = 0
     private val actionGetContentActivityLauncher =
         registerForActivityResult(ActionGetContentAsWallpaperContract()) { result ->
             when {
                 result !== null -> {
-                    tmpWallpaper = result
+                    wallpapersListViewModel.updateExistWallpaper(result)
                 }
             }
         }
@@ -66,6 +65,7 @@ class MainActivity : AppCompatActivity() {
 
     //  Opens WallpaperDetailActivity when RecyclerView item is clicked.
     private fun adapterOnClick(wallpaper: Wallpaper) {
+        tmpWallpaperId = wallpaper.id
         actionGetContentActivityLauncher.launch(wallpaper)
     }
 
