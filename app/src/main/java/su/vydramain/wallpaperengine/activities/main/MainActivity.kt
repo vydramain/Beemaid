@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import su.vydramain.wallpaperengine.R
 import su.vydramain.wallpaperengine.adapters.WallpapersAdapter
-import su.vydramain.wallpaperengine.contracts.ActionGetContentContract
+import su.vydramain.wallpaperengine.contracts.ActionGetContentAsWallpaperContract
 import su.vydramain.wallpaperengine.data.Wallpaper
 import su.vydramain.wallpaperengine.models.WallpaperListViewModel
 import su.vydramain.wallpaperengine.models.WallpaperListViewModelFactory
@@ -21,17 +21,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var addWallpaperPreviewButton: Button
     private lateinit var mainSetApplyWallpapersButton: Button
 
+    private lateinit var wallpapersAdapter: WallpapersAdapter
     private val wallpapersListViewModel by viewModels<WallpaperListViewModel> {
         WallpaperListViewModelFactory(this)
     }
 
-    private val tmpWallpaper = Wallpaper(0, "", Uri.parse(""))
+    private var tmpWallpaper = Wallpaper(0, "", Uri.parse(""))
     private val actionGetContentActivityLauncher =
-        registerForActivityResult(ActionGetContentContract()) { result ->
+        registerForActivityResult(ActionGetContentAsWallpaperContract()) { result ->
             when {
                 result !== null -> {
-                    tmpWallpaper.imageUri = result
-                    tmpWallpaper.path = result.toString()
+                    tmpWallpaper = result
                 }
             }
         }
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Instantiates wallpapersAdapter which displays the contents sequentially.
-        val wallpapersAdapter = WallpapersAdapter { wallpaper -> adapterOnClick(wallpaper) }
+        wallpapersAdapter = WallpapersAdapter { wallpaper -> adapterOnClick(wallpaper) }
 
         val recyclerView: RecyclerView = findViewById(R.id.main_set_wallpaper_recycler_view)
         recyclerView.adapter = wallpapersAdapter
@@ -66,10 +66,7 @@ class MainActivity : AppCompatActivity() {
 
     //  Opens WallpaperDetailActivity when RecyclerView item is clicked.
     private fun adapterOnClick(wallpaper: Wallpaper) {
-        actionGetContentActivityLauncher.launch(0)
-
-        wallpaper.path = tmpWallpaper.path
-        wallpaper.imageUri = tmpWallpaper.imageUri
+        actionGetContentActivityLauncher.launch(wallpaper)
     }
 
     private fun applyWallpapers() {
