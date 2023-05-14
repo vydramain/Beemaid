@@ -30,16 +30,13 @@ class WallpapersDataSource(resources: Resources) {
         }
     }
 
+    // I assume, I need to replace object. Not only data in object for observer look.
     fun replaceWallpaper(wallpaper: Wallpaper) {
         val currentList = wallpapersLiveData.value
         if (null != currentList) {
-            currentList.forEach {
-                if (it.id == wallpaper.id) {
-                    it.path = wallpaper.path
-                    it.imageUri = wallpaper.imageUri
-                }
-            }
-            wallpapersLiveData.postValue(currentList)
+            wallpapersLiveData.postValue(currentList.map {
+                if (wallpaper.id == it.id) wallpaper else it
+            })
         }
     }
 
