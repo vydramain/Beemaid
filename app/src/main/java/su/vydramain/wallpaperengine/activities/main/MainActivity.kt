@@ -17,6 +17,7 @@ import su.vydramain.wallpaperengine.models.WallpaperListViewModelFactory
 class MainActivity : AppCompatActivity() {
     private lateinit var wallpaperManager: WallpaperManager
 
+    private lateinit var recyclerView: RecyclerView
     private lateinit var addWallpaperPreviewButton: Button
     private lateinit var mainSetApplyWallpapersButton: Button
 
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
             when {
                 result !== null -> {
                     wallpapersListViewModel.updateExistWallpaper(result)
+                    recyclerView.adapter = wallpapersAdapter
                 }
             }
         }
@@ -53,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         // Instantiates wallpapersAdapter which displays the contents sequentially.
         wallpapersAdapter = WallpapersAdapter { wallpaper -> adapterOnClick(wallpaper) }
 
-        val recyclerView: RecyclerView = findViewById(R.id.main_set_wallpaper_recycler_view)
+        recyclerView = findViewById(R.id.main_set_wallpaper_recycler_view)
         recyclerView.adapter = wallpapersAdapter
 
         wallpapersListViewModel.wallpapersLiveData.observe(this) {
