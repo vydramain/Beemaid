@@ -12,13 +12,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_set_wallpaper_recycler_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
 
         app:layoutManager="LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/main_set_buttons_bottom_wrapper"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
