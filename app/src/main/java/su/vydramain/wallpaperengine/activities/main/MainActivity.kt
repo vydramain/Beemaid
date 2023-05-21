@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         WallpaperListViewModelFactory(this)
     }
 
-    private var tmpWallpaperId: Long = 0
     private val actionGetContentActivityLauncher =
         registerForActivityResult(ActionGetContentAsWallpaperContract()) { result ->
             when {
@@ -69,8 +68,6 @@ class MainActivity : AppCompatActivity() {
     private fun adapterOnClick(wallpaper: Wallpaper) {
         wallpaper.time = 0
         wallpaper.transition = 0
-
-        tmpWallpaperId = wallpaper.id
 
         actionGetContentActivityLauncher.launch(wallpaper)
     }
