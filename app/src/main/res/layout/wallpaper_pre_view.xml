@@ -78,7 +78,7 @@
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
                         android:autofillHints="no"
-                        android:inputType="text" />
+                        android:inputType="number" />
 
                     <LinearLayout
                         android:id="@+id/wallpaper_settings_duration_buttons_wrapper"
@@ -132,7 +132,7 @@
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
                         android:autofillHints="no"
-                        android:inputType="text" />
+                        android:inputType="number" />
 
                     <LinearLayout
                         android:id="@+id/wallpaper_settings_transition_buttons_wrapper"

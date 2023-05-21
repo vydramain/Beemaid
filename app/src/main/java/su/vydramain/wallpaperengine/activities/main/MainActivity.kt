@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 
     //  Opens WallpaperDetailActivity when RecyclerView item is clicked.
     private fun adapterOnClick(wallpaper: Wallpaper) {
-        wallpaper.time = 0
+        wallpaper.duration = 0
         wallpaper.transition = 0
 
         actionGetContentActivityLauncher.launch(wallpaper)
