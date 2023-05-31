@@ -78,7 +78,9 @@
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
                         android:autofillHints="no"
-                        android:inputType="number" />
+                        android:ems="10"
+                        android:inputType="number"
+                        tools:ignore="LabelFor" />
 
                     <LinearLayout
                         android:id="@+id/wallpaper_settings_duration_buttons_wrapper"
@@ -100,12 +102,12 @@
                             app:srcCompat="@drawable/add" />
 
                         <ImageButton
-                            android:id="@+id/wallpaper_settings_duration_button_remove"
+                            android:id="@+id/wallpaper_settings_duration_button_reduce"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:adjustViewBounds="true"
-                            android:contentDescription="@string/wallpaper_settings_duration_button_remove_description"
+                            android:contentDescription="@string/wallpaper_settings_duration_button_reduce_description"
                             android:scaleType="fitCenter"
 
                             app:srcCompat="@drawable/remove" />
@@ -132,7 +134,9 @@
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
                         android:autofillHints="no"
-                        android:inputType="number" />
+                        android:ems="10"
+                        android:inputType="number"
+                        tools:ignore="LabelFor" />
 
                     <LinearLayout
                         android:id="@+id/wallpaper_settings_transition_buttons_wrapper"
@@ -153,12 +157,12 @@
                             app:srcCompat="@drawable/add" />
 
                         <ImageButton
-                            android:id="@+id/wallpaper_settings_transition_button_remove"
+                            android:id="@+id/wallpaper_settings_transition_button_reduce"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:adjustViewBounds="true"
-                            android:contentDescription="@string/wallpaper_settings_transition_button_remove_description"
+                            android:contentDescription="@string/wallpaper_settings_transition_button_reduce_description"
                             android:scaleType="fitCenter"
 
                             app:srcCompat="@drawable/remove" />

@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity() {
         registerForActivityResult(ActionGetContentAsWallpaperContract()) { result ->
             when {
                 result !== null -> {
+                    result.duration = 0
+                    result.transition = 0
                     wallpapersListViewModel.updateExistWallpaper(result)
                     recyclerView.adapter = wallpapersAdapter
                 }

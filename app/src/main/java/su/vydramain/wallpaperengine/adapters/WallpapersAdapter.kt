@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
@@ -28,6 +29,10 @@ class WallpapersAdapter(private val onClick: (Wallpaper) -> Unit) :
             itemView.findViewById(R.id.wallpaper_choose_button)
         private var wallpaperPreviewDuration: EditText =
             itemView.findViewById(R.id.wallpaper_settings_duration_input)
+        private var wallpaperPreviewDurationAddButton: ImageButton =
+            itemView.findViewById(R.id.wallpaper_settings_duration_button_add)
+        private var wallpaperPreviewDurationReduceButton: ImageButton =
+            itemView.findViewById(R.id.wallpaper_settings_duration_button_reduce)
         private var wallpaperPreviewTransition: EditText =
             itemView.findViewById(R.id.wallpaper_settings_transition_input)
 
@@ -46,8 +51,10 @@ class WallpapersAdapter(private val onClick: (Wallpaper) -> Unit) :
             currentWallpaper = wallpaper
 
             wallpaperPreviewPath.text = wallpaper.path
-            wallpaperPreviewDuration.setText(wallpaper.duration.toInt())
-            wallpaperPreviewTransition.setText(wallpaper.transition.toInt())
+
+            wallpaperPreviewDuration.setText(wallpaper.duration.toString())
+
+            wallpaperPreviewTransition.setText(wallpaper.transition.toString())
 
             if (Uri.EMPTY != wallpaper.imageUri) {
                 wallpaperPreviewImage.setImageURI(wallpaper.imageUri)

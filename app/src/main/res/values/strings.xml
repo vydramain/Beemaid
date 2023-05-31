@@ -11,10 +11,10 @@
     <string name="wallpaper_preview_description">Image preview</string>
     <string name="wallpaper_settings_duration_title">Time</string>
     <string name="wallpaper_settings_duration_button_add_description">Add time button</string>
-    <string name="wallpaper_settings_duration_button_remove_description">Remove time button</string>
+    <string name="wallpaper_settings_duration_button_reduce_description">Remove time button</string>
     <string name="wallpaper_settings_transition_title">Transition</string>
     <string name="wallpaper_settings_transition_button_add_description">Add transition button</string>
-    <string name="wallpaper_settings_transition_button_remove_description">Remove transition button</string>
+    <string name="wallpaper_settings_transition_button_reduce_description">Remove transition button</string>
 
     <string name="header_wallpapers_string">Wallpapers</string>
     <string name="header_wallpaper_finder_string">Wallpaper finder</string>
