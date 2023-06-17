@@ -95,7 +95,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:adjustViewBounds="true"
+                            android:adjustViewBounds="true" 
                             android:contentDescription="@string/wallpaper_settings_duration_button_add_description"
                             android:scaleType="fitCenter"
 
