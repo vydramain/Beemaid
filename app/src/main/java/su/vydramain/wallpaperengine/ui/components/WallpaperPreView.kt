@@ -1,23 +1,29 @@
 package su.vydramain.wallpaperengine.ui.components
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import android.net.Uri
-import android.widget.ImageButton
+
+import androidx.compose.material.Text
+import androidx.compose.material.Button
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
+import androidx.compose.ui.text.TextRange
+import androidx.compose.material.TextField
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Text
-import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.TextField
+import androidx.compose.runtime.saveable.rememberSaveable
+
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.composed
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -25,16 +31,18 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 
+
 import su.vydramain.wallpaperengine.R
 import su.vydramain.wallpaperengine.data.Wallpaper
 
-@SuppressLint("UseCompatLoadingForDrawables")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WallpaperPreView(
     wallpaper: Wallpaper
 ) {
     val standardPadding = 16.dp
+
+    val durationValue = 0
+    val transitionValue = 0
 
     Column(
         modifier = Modifier
@@ -42,7 +50,6 @@ fun WallpaperPreView(
             .padding(start = 16.dp, top = 16.dp, end = 16.dp)
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
-
             Column(
                 modifier = Modifier
                     .padding(top = 16.dp)
@@ -63,71 +70,21 @@ fun WallpaperPreView(
                     )
                 )
 
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    Text(
-                        text = stringResource(R.string.wallpaper_settings_duration_title),
-                        modifier = Modifier.width(70.dp)
-                    )
+                RowWithParameterAndControls(
+                    name = stringResource(R.string.wallpaper_settings_duration_title),
+                    value = durationValue.toString(),
+                    onValueChange = {},
+                    onClickAddButton = {},
+                    onClickReduceButton = {}
+                )
 
-                    TextField(
-                        value = "",
-                        onValueChange = {},
-                        modifier = Modifier.weight(1f),
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Done
-                        )
-                    )
-
-                    Row(modifier = Modifier.weight(1f)) {
-                        Image(
-                            painter = painterResource(id = R.drawable.add),
-                            contentDescription = stringResource(R.string.wallpaper_settings_duration_button_add_description),
-                            contentScale = ContentScale.Fit,
-                            modifier = Modifier.weight(1f)
-                        )
-
-                        Image(
-                            painter = painterResource(id = R.drawable.add),
-                            contentDescription = stringResource(R.string.wallpaper_settings_duration_button_reduce_description),
-                            contentScale = ContentScale.Fit,
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-                }
-
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    Text(
-                        text = stringResource(R.string.wallpaper_settings_transition_title),
-                        modifier = Modifier.width(70.dp)
-                    )
-
-                    TextField(
-                        value = "",
-                        onValueChange = {},
-                        modifier = Modifier.weight(1f),
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Done
-                        )
-                    )
-
-                    Row(modifier = Modifier.weight(1f)) {
-                        Image(
-                            painter = painterResource(id = R.drawable.add),
-                            contentDescription = stringResource(R.string.wallpaper_settings_transition_button_add_description),
-                            contentScale = ContentScale.Fit,
-                            modifier = Modifier.weight(1f)
-                        )
-
-                        Image(
-                            painter = painterResource(id = R.drawable.add),
-                            contentDescription = stringResource(R.string.wallpaper_settings_transition_button_reduce_description),
-                            contentScale = ContentScale.Fit,
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-                }
+                RowWithParameterAndControls(
+                    name = stringResource(R.string.wallpaper_settings_transition_title),
+                    value = transitionValue.toString(),
+                    onValueChange = {},
+                    onClickAddButton = {},
+                    onClickReduceButton = {},
+                )
             }
 
             Image(
@@ -152,7 +109,12 @@ fun WallpaperPreView(
     }
 }
 
-@Preview()
+@Preview(name = "Light Mode")
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true,
+    name = "Dark Mode"
+)
 @Composable()
 fun WallpaperPreViewPreview() {
     WallpaperPreView(
@@ -164,4 +126,67 @@ fun WallpaperPreViewPreview() {
             0
         )
     )
+}
+
+@Composable
+fun RowWithParameterAndControls(
+    name: String,
+    value: String,
+    onValueChange: (String) -> Unit,
+    onClickAddButton: () -> Unit,
+    onClickReduceButton: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Row(modifier = Modifier
+        .fillMaxWidth()
+        .composed { modifier }) {
+        Text(
+            text = name,
+            modifier = Modifier.width(70.dp)
+        )
+
+        TextField(
+            value = value,
+            onValueChange = onValueChange,
+            modifier = Modifier.weight(1f),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Done
+            )
+        )
+
+        Row(modifier = Modifier.weight(1f)) {
+            Image(
+                painter = painterResource(id = R.drawable.add),
+                contentDescription = stringResource(R.string.wallpaper_settings_transition_button_add_description),
+                contentScale = ContentScale.Fit,
+                modifier = Modifier.weight(1f)
+            )
+
+            Image(
+                painter = painterResource(id = R.drawable.add),
+                contentDescription = stringResource(R.string.wallpaper_settings_transition_button_reduce_description),
+                contentScale = ContentScale.Fit,
+                modifier = Modifier.weight(1f)
+            )
+        }
+    }
+}
+
+@Preview(name = "Light Mode")
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true,
+    name = "Dark Mode"
+)
+@Composable
+fun RowWithParameterAndControlsPreview() {
+    val temporaryValue = 0
+
+    RowWithParameterAndControls(
+        name = "temporary_name",
+        value = temporaryValue.toString(),
+        onValueChange = {},
+        onClickAddButton = {},
+        onClickReduceButton = {})
 }
