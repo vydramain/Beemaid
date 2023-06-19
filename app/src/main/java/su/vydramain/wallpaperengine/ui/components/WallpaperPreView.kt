@@ -14,15 +14,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.saveable.rememberSaveable
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.composed
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -49,7 +52,10 @@ fun WallpaperPreView(
             .fillMaxWidth()
             .padding(start = 16.dp, top = 16.dp, end = 16.dp)
     ) {
-        Row(modifier = Modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
             Column(
                 modifier = Modifier
                     .padding(top = 16.dp)
@@ -92,7 +98,7 @@ fun WallpaperPreView(
                 contentDescription = stringResource(R.string.wallpaper_preview_description),
                 modifier = Modifier
                     .size(72.dp)
-                    .weight(1f)
+                    .align(Alignment.CenterVertically)
             )
 
             // Other components can be added here for additional settings
@@ -164,7 +170,7 @@ fun RowWithParameterAndControls(
             )
 
             Image(
-                painter = painterResource(id = R.drawable.add),
+                painter = painterResource(id = R.drawable.remove),
                 contentDescription = stringResource(R.string.wallpaper_settings_transition_button_reduce_description),
                 contentScale = ContentScale.Fit,
                 modifier = Modifier.weight(1f)
