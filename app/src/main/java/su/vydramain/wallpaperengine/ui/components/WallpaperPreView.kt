@@ -1,30 +1,26 @@
 package su.vydramain.wallpaperengine.ui.components
 
-import android.annotation.SuppressLint
-import android.content.res.Configuration
 import android.net.Uri
+
+import android.content.res.Configuration
 
 import androidx.compose.material.Text
 import androidx.compose.material.Button
-import androidx.compose.foundation.Image
-import androidx.compose.ui.text.TextRange
 import androidx.compose.material.TextField
+
+import androidx.compose.material3.MaterialTheme
+
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.runtime.saveable.rememberSaveable
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.composed
 import androidx.compose.ui.layout.ContentScale
@@ -34,6 +30,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 
+import androidx.compose.runtime.Composable
 
 import su.vydramain.wallpaperengine.R
 import su.vydramain.wallpaperengine.data.Wallpaper
@@ -63,7 +60,9 @@ fun WallpaperPreView(
             ) {
                 Text(
                     text = stringResource(R.string.wallpaper_settings_title),
-                    modifier = Modifier.fillMaxWidth()
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    modifier = Modifier
+                        .fillMaxWidth()
                 )
 
                 TextField(
@@ -100,8 +99,6 @@ fun WallpaperPreView(
                     .size(72.dp)
                     .align(Alignment.CenterVertically)
             )
-
-            // Other components can be added here for additional settings
         }
 
         Button(
@@ -148,32 +145,37 @@ fun RowWithParameterAndControls(
         .composed { modifier }) {
         Text(
             text = name,
-            modifier = Modifier.width(70.dp)
+            color = MaterialTheme.colorScheme.onPrimary,
+            modifier = Modifier
+                .width(70.dp)
+                .align(Alignment.CenterVertically)
         )
 
         TextField(
             value = value,
             onValueChange = onValueChange,
-            modifier = Modifier.weight(1f),
+            modifier = Modifier
+                .weight(1f),
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Done
             )
         )
 
-        Row(modifier = Modifier.weight(1f)) {
+        Row(
+            modifier = Modifier
+                .align(Alignment.CenterVertically)
+        ) {
             Image(
                 painter = painterResource(id = R.drawable.add),
                 contentDescription = stringResource(R.string.wallpaper_settings_transition_button_add_description),
                 contentScale = ContentScale.Fit,
-                modifier = Modifier.weight(1f)
             )
 
             Image(
                 painter = painterResource(id = R.drawable.remove),
                 contentDescription = stringResource(R.string.wallpaper_settings_transition_button_reduce_description),
                 contentScale = ContentScale.Fit,
-                modifier = Modifier.weight(1f)
             )
         }
     }
