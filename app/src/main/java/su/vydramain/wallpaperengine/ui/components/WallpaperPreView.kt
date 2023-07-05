@@ -8,8 +8,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.Button
 import androidx.compose.material.TextField
 
-import androidx.compose.material3.MaterialTheme
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
@@ -34,6 +32,7 @@ import androidx.compose.runtime.Composable
 
 import su.vydramain.wallpaperengine.R
 import su.vydramain.wallpaperengine.data.Wallpaper
+import su.vydramain.wallpaperengine.ui.theme.WallpaperEngineAppTheme
 
 @Composable
 fun WallpaperPreView(
@@ -60,7 +59,6 @@ fun WallpaperPreView(
             ) {
                 Text(
                     text = stringResource(R.string.wallpaper_settings_title),
-                    color = MaterialTheme.colorScheme.onPrimary,
                     modifier = Modifier
                         .fillMaxWidth()
                 )
@@ -124,15 +122,18 @@ fun WallpaperPreView(
 )
 @Composable()
 fun WallpaperPreViewPreview() {
-    WallpaperPreView(
-        Wallpaper(
-            1,
-            "empty_path",
-            Uri.EMPTY,
-            0,
-            0
+
+    WallpaperEngineAppTheme {
+        WallpaperPreView(
+            Wallpaper(
+                1,
+                "empty_path",
+                Uri.EMPTY,
+                0,
+                0
+            )
         )
-    )
+    }
 }
 
 @Composable
@@ -147,12 +148,12 @@ fun RowWithParameterAndControls(
     Row(modifier = Modifier
         .fillMaxWidth()
         .composed { modifier }) {
+
         Text(
             text = name,
-            color = MaterialTheme.colorScheme.onPrimary,
             modifier = Modifier
                 .width(70.dp)
-                .align(Alignment.CenterVertically)
+                .align(Alignment.CenterVertically),
         )
 
         TextField(
@@ -195,23 +196,16 @@ fun RowWithParameterAndControls(
     showBackground = true,
     name = "Dark Mode"
 )
-@Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    name = "DefaultPreviewDark"
-)
-@Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_NO,
-    name = "DefaultPreviewLight"
-)
-
 @Composable
 fun RowWithParameterAndControlsPreview() {
     val temporaryValue = 0
 
-    RowWithParameterAndControls(
-        name = "temporary_name",
-        value = temporaryValue.toString(),
-        onValueChange = {},
-        onClickAddButton = {},
-        onClickReduceButton = {})
+    WallpaperEngineAppTheme {
+        RowWithParameterAndControls(
+            name = "temporary_name",
+            value = temporaryValue.toString(),
+            onValueChange = {},
+            onClickAddButton = {},
+            onClickReduceButton = {})
+    }
 }

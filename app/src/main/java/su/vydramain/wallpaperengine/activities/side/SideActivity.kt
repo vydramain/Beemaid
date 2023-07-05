@@ -1,9 +1,13 @@
 package su.vydramain.wallpaperengine.activities.side
 
 import android.content.res.Configuration
+
 import android.os.Bundle
+
 import androidx.appcompat.app.AppCompatActivity
+
 import androidx.activity.compose.setContent
+
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
@@ -33,8 +37,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+
 import su.vydramain.wallpaperengine.R
-import su.vydramain.wallpaperengine.ui.theme.WallpaperEngineTheme
+import su.vydramain.wallpaperengine.ui.theme.WallpaperEngineAppTheme
 
 object SampleData {
     // Sample conversation data
@@ -113,7 +118,7 @@ class SideActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            WallpaperEngineTheme {
+            WallpaperEngineAppTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     MessageCard(Message("Nanashi Mumei", "Oh, hi"))
                 }
@@ -191,7 +196,7 @@ fun MessageCard(inputMessage: Message) {
 )
 @Composable
 fun PreviewMessageCard() {
-    WallpaperEngineTheme {
+    WallpaperEngineAppTheme {
         Surface {
             MessageCard(inputMessage = Message("Nanashi Mumei", "Oh, hi"))
         }
@@ -215,7 +220,7 @@ fun Conversation(inputMessages: List<Message>) {
 )
 @Composable
 fun PreviewConversation() {
-    WallpaperEngineTheme {
+    WallpaperEngineAppTheme {
         Conversation(SampleData.conversationSample)
     }
 }

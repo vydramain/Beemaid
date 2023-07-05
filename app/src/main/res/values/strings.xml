@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Wallpaper Engine</string>
 
+    <string name="search">Search</string>
+    <string name="search_replies">Search replies</string>
+    <string name="profile">Profile</string>
+
     <string name="main_set_add_new_wallpaper">Add new wallpaper</string>
     <string name="main_set_apply_wallpaper_button_text">Apply new wallpaper config</string>
 
