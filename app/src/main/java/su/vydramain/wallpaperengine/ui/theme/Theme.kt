@@ -87,9 +87,9 @@ private val DarkColors = darkColorScheme(
 )
 
 @Composable
-fun WallpaperEngineAppTheme (
-  useDarkTheme: Boolean = isSystemInDarkTheme(),
-  content: @Composable() () -> Unit
+fun WallpaperEngineAppTheme(
+    useDarkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable() () -> Unit
 ) {
     val context = LocalContext.current
     val colors = when {
@@ -97,6 +97,7 @@ fun WallpaperEngineAppTheme (
             if (useDarkTheme) dynamicDarkColorScheme(context)
             else dynamicLightColorScheme(context)
         }
+
         useDarkTheme -> DarkColors
         else -> LightColors
     }
@@ -113,8 +114,9 @@ fun WallpaperEngineAppTheme (
         }
     }
 
-  MaterialTheme(
-    colorScheme = colors,
-    content = content
-  )
+    MaterialTheme(
+        colorScheme = colors,
+        typography = typography,
+        content = content
+    )
 }

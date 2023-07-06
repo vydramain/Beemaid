@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.MaterialTheme
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -59,6 +60,7 @@ fun WallpaperPreView(
             ) {
                 Text(
                     text = stringResource(R.string.wallpaper_settings_title),
+                    style = MaterialTheme.typography.titleSmall,
                     modifier = Modifier
                         .fillMaxWidth()
                 )
@@ -66,6 +68,7 @@ fun WallpaperPreView(
                 TextField(
                     value = "",
                     onValueChange = {},
+                    textStyle = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.fillMaxWidth(),
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
@@ -105,7 +108,10 @@ fun WallpaperPreView(
                 .fillMaxWidth()
                 .padding(top = 16.dp),
         ) {
-            Text(text = stringResource(R.string.wallpaper_choose_button_text))
+            Text(
+                text = stringResource(R.string.wallpaper_choose_button_text),
+                style = MaterialTheme.typography.titleSmall,
+            )
         }
     }
 }
@@ -151,6 +157,7 @@ fun RowWithParameterAndControls(
 
         Text(
             text = name,
+            style = MaterialTheme.typography.bodySmall,
             modifier = Modifier
                 .width(70.dp)
                 .align(Alignment.CenterVertically),
@@ -159,6 +166,7 @@ fun RowWithParameterAndControls(
         TextField(
             value = value,
             onValueChange = onValueChange,
+            textStyle = MaterialTheme.typography.bodySmall,
             modifier = Modifier
                 .weight(1f),
             keyboardOptions = KeyboardOptions(
