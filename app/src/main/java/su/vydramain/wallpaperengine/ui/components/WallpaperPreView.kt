@@ -9,19 +9,27 @@ import androidx.compose.material.Button
 import androidx.compose.material.TextField
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.ContentAlpha
+import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Image
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.composed
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -30,6 +38,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.compositeOver
 
 import su.vydramain.wallpaperengine.R
 import su.vydramain.wallpaperengine.data.Wallpaper
@@ -52,6 +61,7 @@ fun WallpaperPreView(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .height(IntrinsicSize.Max)
         ) {
             Column(
                 modifier = Modifier
@@ -61,6 +71,7 @@ fun WallpaperPreView(
                 Text(
                     text = stringResource(R.string.wallpaper_settings_title),
                     style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier
                         .fillMaxWidth()
                 )
@@ -69,6 +80,9 @@ fun WallpaperPreView(
                     value = "",
                     onValueChange = {},
                     textStyle = MaterialTheme.typography.bodySmall,
+                    colors = TextFieldDefaults.textFieldColors(
+                        textColor = MaterialTheme.colorScheme.onSurface,
+                    ),
                     modifier = Modifier.fillMaxWidth(),
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
@@ -93,17 +107,33 @@ fun WallpaperPreView(
                 )
             }
 
-            Image(
-                painter = painterResource(R.drawable.ic_menu_gallery),
+            Icon(
+                Icons.Outlined.Image,
                 contentDescription = stringResource(R.string.wallpaper_preview_description),
                 modifier = Modifier
-                    .size(72.dp)
+                    .padding(5.dp)
+                    .border(
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        shape = MaterialTheme.shapes.small
+                    )
                     .align(Alignment.CenterVertically)
+                    .width(72.dp)
+                    .fillMaxHeight(),
+                tint = MaterialTheme.colorScheme.onSurface,
             )
         }
 
         Button(
             onClick = { /* Handle button click */ },
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = MaterialTheme.colorScheme.tertiary,
+                contentColor = MaterialTheme.colorScheme.onTertiary,
+                disabledBackgroundColor = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.12f)
+                    .compositeOver(androidx.compose.material.MaterialTheme.colors.surface),
+                disabledContentColor = MaterialTheme.colorScheme.onTertiary
+                    .copy(alpha = ContentAlpha.disabled)
+            ),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp),
@@ -111,6 +141,7 @@ fun WallpaperPreView(
             Text(
                 text = stringResource(R.string.wallpaper_choose_button_text),
                 style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.surface,
             )
         }
     }
@@ -149,16 +180,18 @@ fun RowWithParameterAndControls(
     onValueChange: (String) -> Unit,
     onClickAddButton: () -> Unit,
     onClickReduceButton: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-    Row(modifier = Modifier
-        .fillMaxWidth()
-        .composed { modifier }) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+    ) {
 
         Text(
             text = name,
             style = MaterialTheme.typography.bodySmall,
-            modifier = Modifier
+            color = MaterialTheme.colorScheme.onSurface,
+            modifier = modifier
                 .width(70.dp)
                 .align(Alignment.CenterVertically),
         )
@@ -167,7 +200,10 @@ fun RowWithParameterAndControls(
             value = value,
             onValueChange = onValueChange,
             textStyle = MaterialTheme.typography.bodySmall,
-            modifier = Modifier
+            colors = TextFieldDefaults.textFieldColors(
+                textColor = MaterialTheme.colorScheme.onSurface,
+            ),
+            modifier = modifier
                 .weight(1f),
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
@@ -176,7 +212,7 @@ fun RowWithParameterAndControls(
         )
 
         Row(
-            modifier = Modifier
+            modifier = modifier
                 .align(Alignment.CenterVertically)
         ) {
             Image(
