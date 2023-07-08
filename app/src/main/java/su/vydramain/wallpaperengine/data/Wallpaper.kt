@@ -8,4 +8,20 @@ class Wallpaper(
     var imageUri: Uri,
     var duration: Long = 0,
     var transition: Long = 0,
-)
+) {
+    fun increaseDuration() {
+        duration++
+    }
+
+    fun decreaseDuration() {
+        duration--
+    }
+
+    fun increaseTransition() {
+        transition++
+    }
+
+    fun decreaseTransition() {
+        transition--
+    }
+}

@@ -30,7 +30,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -39,24 +38,23 @@ import androidx.compose.ui.tooling.preview.Preview
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.compositeOver
+import coil.compose.rememberAsyncImagePainter
 
 import su.vydramain.wallpaperengine.R
 import su.vydramain.wallpaperengine.data.Wallpaper
 import su.vydramain.wallpaperengine.ui.theme.WallpaperEngineAppTheme
 
+private val STANDARD_PADDING = 16.dp
+
 @Composable
 fun WallpaperPreView(
-    wallpaper: Wallpaper
+    wallpaper: Wallpaper,
+    onChooseClick: () -> Unit
 ) {
-    val standardPadding = 16.dp
-
-    val durationValue = 0
-    val transitionValue = 0
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+            .padding(start = STANDARD_PADDING, top = STANDARD_PADDING, end = STANDARD_PADDING)
     ) {
         Row(
             modifier = Modifier
@@ -65,7 +63,7 @@ fun WallpaperPreView(
         ) {
             Column(
                 modifier = Modifier
-                    .padding(top = 16.dp)
+                    .padding(top = STANDARD_PADDING)
                     .weight(1f)
             ) {
                 Text(
@@ -77,8 +75,8 @@ fun WallpaperPreView(
                 )
 
                 TextField(
-                    value = "",
-                    onValueChange = {},
+                    value = wallpaper.path,
+                    onValueChange = { wallpaper.path = it },
                     textStyle = MaterialTheme.typography.bodySmall,
                     colors = TextFieldDefaults.textFieldColors(
                         textColor = MaterialTheme.colorScheme.onSurface,
@@ -92,23 +90,23 @@ fun WallpaperPreView(
 
                 RowWithParameterAndControls(
                     name = stringResource(R.string.wallpaper_settings_duration_title),
-                    value = durationValue.toString(),
-                    onValueChange = {},
-                    onClickAddButton = {},
-                    onClickReduceButton = {}
+                    value = wallpaper.duration.toString(),
+                    onValueChange = { /* update duration */ },
+                    onClickIncreaseButton = { /* increase duration */ },
+                    onClickDecreaseButton = { /* decrease duration */ }
                 )
 
                 RowWithParameterAndControls(
                     name = stringResource(R.string.wallpaper_settings_transition_title),
-                    value = transitionValue.toString(),
-                    onValueChange = {},
-                    onClickAddButton = {},
-                    onClickReduceButton = {},
+                    value = wallpaper.transition.toString(),
+                    onValueChange = { /* update transition */ },
+                    onClickIncreaseButton = { /* increase transition */ },
+                    onClickDecreaseButton = { /* decrease transition */ }
                 )
             }
 
-            Icon(
-                Icons.Outlined.Image,
+            WallpaperImagePreView(
+                wallpaperImageUri = wallpaper.imageUri,
                 contentDescription = stringResource(R.string.wallpaper_preview_description),
                 modifier = Modifier
                     .padding(5.dp)
@@ -120,12 +118,11 @@ fun WallpaperPreView(
                     .align(Alignment.CenterVertically)
                     .width(72.dp)
                     .fillMaxHeight(),
-                tint = MaterialTheme.colorScheme.onSurface,
             )
         }
 
         Button(
-            onClick = { /* Handle button click */ },
+            onClick = onChooseClick,
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = MaterialTheme.colorScheme.tertiary,
                 contentColor = MaterialTheme.colorScheme.onTertiary,
@@ -136,7 +133,7 @@ fun WallpaperPreView(
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp),
+                .padding(top = STANDARD_PADDING),
         ) {
             Text(
                 text = stringResource(R.string.wallpaper_choose_button_text),
@@ -162,13 +159,14 @@ fun WallpaperPreViewPreview() {
 
     WallpaperEngineAppTheme {
         WallpaperPreView(
-            Wallpaper(
+            wallpaper = Wallpaper(
                 1,
                 "empty_path",
                 Uri.EMPTY,
                 0,
                 0
-            )
+            ),
+            onChooseClick = {}
         )
     }
 }
@@ -178,8 +176,8 @@ fun RowWithParameterAndControls(
     name: String,
     value: String,
     onValueChange: (String) -> Unit,
-    onClickAddButton: () -> Unit,
-    onClickReduceButton: () -> Unit,
+    onClickIncreaseButton: () -> Unit,
+    onClickDecreaseButton: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -215,17 +213,47 @@ fun RowWithParameterAndControls(
             modifier = modifier
                 .align(Alignment.CenterVertically)
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.add),
-                contentDescription = stringResource(R.string.wallpaper_settings_transition_button_add_description),
-                contentScale = ContentScale.Fit,
-            )
+            Button(
+                onClick = onClickIncreaseButton,
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = MaterialTheme.colorScheme.onTertiary,
+                    contentColor = MaterialTheme.colorScheme.tertiary,
+                    disabledBackgroundColor = MaterialTheme.colorScheme.onTertiary.copy(alpha = 0.12f)
+                        .compositeOver(androidx.compose.material.MaterialTheme.colors.surface),
+                    disabledContentColor = MaterialTheme.colorScheme.tertiary
+                        .copy(alpha = ContentAlpha.disabled)
+                ),
+                modifier = modifier
+                    .width(50.dp)
+                    .padding(all = 2.dp)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.add),
+                    contentDescription = stringResource(R.string.wallpaper_settings_transition_button_add_description),
+                    tint = MaterialTheme.colorScheme.tertiary,
+                )
+            }
 
-            Image(
-                painter = painterResource(id = R.drawable.remove),
-                contentDescription = stringResource(R.string.wallpaper_settings_transition_button_reduce_description),
-                contentScale = ContentScale.Fit,
-            )
+            Button(
+                onClick = onClickDecreaseButton,
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = MaterialTheme.colorScheme.onTertiary,
+                    contentColor = MaterialTheme.colorScheme.tertiary,
+                    disabledBackgroundColor = MaterialTheme.colorScheme.onTertiary.copy(alpha = 0.12f)
+                        .compositeOver(androidx.compose.material.MaterialTheme.colors.surface),
+                    disabledContentColor = MaterialTheme.colorScheme.tertiary
+                        .copy(alpha = ContentAlpha.disabled)
+                ),
+                modifier = modifier
+                    .width(50.dp)
+                    .padding(all = 2.dp)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.remove),
+                    contentDescription = stringResource(R.string.wallpaper_settings_transition_button_reduce_description),
+                    tint = MaterialTheme.colorScheme.tertiary,
+                )
+            }
         }
     }
 }
@@ -249,7 +277,49 @@ fun RowWithParameterAndControlsPreview() {
             name = "temporary_name",
             value = temporaryValue.toString(),
             onValueChange = {},
-            onClickAddButton = {},
-            onClickReduceButton = {})
+            onClickIncreaseButton = {},
+            onClickDecreaseButton = {})
+    }
+}
+
+@Composable
+fun WallpaperImagePreView(
+    wallpaperImageUri: Uri,
+    contentDescription: String,
+    modifier: Modifier = Modifier,
+) {
+    when (wallpaperImageUri.path?.isEmpty()) {
+        false -> Image(
+            painter = rememberAsyncImagePainter(model = wallpaperImageUri),
+            contentDescription = contentDescription,
+            modifier = modifier
+        )
+
+        else -> Icon(
+            imageVector = Icons.Outlined.Image,
+            contentDescription = contentDescription,
+            modifier = modifier,
+            tint = MaterialTheme.colorScheme.onSurface,
+        )
+    }
+}
+
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    showBackground = true,
+    name = "Light Mode"
+)
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true,
+    name = "Dark Mode"
+)
+@Composable
+fun WallpaperImagePreViewPreview() {
+    WallpaperEngineAppTheme {
+        WallpaperImagePreView(
+            wallpaperImageUri = Uri.EMPTY,
+            contentDescription = "Description",
+        )
     }
 }
