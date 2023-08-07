@@ -43,6 +43,7 @@ import coil.compose.rememberAsyncImagePainter
 import su.vydramain.wallpaperengine.R
 import su.vydramain.wallpaperengine.data.Wallpaper
 import su.vydramain.wallpaperengine.ui.theme.WallpaperEngineAppTheme
+import java.util.UUID
 
 private val STANDARD_PADDING = 16.dp
 
@@ -160,7 +161,7 @@ fun WallpaperPreViewPreview() {
     WallpaperEngineAppTheme {
         WallpaperPreView(
             wallpaper = Wallpaper(
-                1,
+                UUID.randomUUID(),
                 "empty_path",
                 Uri.EMPTY,
                 0,

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import su.vydramain.wallpaperengine.data.Wallpaper
 import su.vydramain.wallpaperengine.data.WallpapersDataSource
+import java.util.UUID
 import kotlin.random.Random
 
 class WallpaperListViewModel(val dataSource: WallpapersDataSource) : ViewModel() {
@@ -19,7 +20,7 @@ class WallpaperListViewModel(val dataSource: WallpapersDataSource) : ViewModel()
 
         dataSource.addWallpaper(
             Wallpaper(
-                Random.nextLong(),
+                UUID.randomUUID(),
                 wallpaperPath,
                 Uri.EMPTY
             )

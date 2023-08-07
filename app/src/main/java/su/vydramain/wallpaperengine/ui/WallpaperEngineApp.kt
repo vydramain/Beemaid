@@ -2,60 +2,70 @@ package su.vydramain.wallpaperengine.ui
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
-
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
-
 import androidx.compose.runtime.Composable
-
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.BottomCenter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import su.vydramain.wallpaperengine.R
+import su.vydramain.wallpaperengine.data.Wallpaper
 import su.vydramain.wallpaperengine.data.WallpaperEngineUIState
+import su.vydramain.wallpaperengine.ui.components.WallpaperPreViewScreen
 
 @Composable
 fun WallpaperEngineApp(
     wallpaperEngineUIState: WallpaperEngineUIState,
+    addWallpaperTemplate: () -> Unit,
 ) {
+    WallpaperEngineAppContent(
+        wallpaperEngineUIState = wallpaperEngineUIState,
+        addWallpaperTemplate = addWallpaperTemplate
+    )
 }
 
 @Composable
 fun WallpaperEngineAppContent(
-    modifier: Modifier = Modifier,
     wallpaperEngineUIState: WallpaperEngineUIState,
+    addWallpaperTemplate: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
 
     Column(
         modifier = modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Column(
             modifier = modifier
                 .fillMaxWidth()
-                .height(IntrinsicSize.Max)
+                .weight(1F)
+//                .height(IntrinsicSize.Max)
         ) {
-
+            WallpaperPreViewScreen(
+                wallpaperEngineUIState = wallpaperEngineUIState,
+                modifier = modifier
+            )
         }
 
         Button(
-            onClick = {},
+            onClick = { addWallpaperTemplate() },
             modifier = modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp)
+                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+                .zIndex(2F),
         ) {
             Text(
                 text = stringResource(R.string.wallpaper_engine_app_content_add_new_wallpaper),
@@ -79,6 +89,15 @@ fun WallpaperEngineAppContent(
 @Composable
 fun WallpaperEngineAppContentPreview() {
     WallpaperEngineAppContent(
-        wallpaperEngineUIState = WallpaperEngineUIState()
+        wallpaperEngineUIState = WallpaperEngineUIState(
+            listOf(
+                Wallpaper(),
+                Wallpaper(),
+                Wallpaper(),
+                Wallpaper(),
+                Wallpaper()
+            )
+        ),
+        addWallpaperTemplate = {}
     )
 }

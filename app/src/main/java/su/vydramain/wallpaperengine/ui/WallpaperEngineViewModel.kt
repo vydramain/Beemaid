@@ -20,25 +20,15 @@ class WallpaperEngineViewModel : ViewModel() {
         _uiState.value = WallpaperEngineUIState(
             emptyList()
         )
-
     }
 
-    fun insertWallpaper(wallpaperPath: String?) {
-        if (wallpaperPath == null) {
-            return
-        }
+    fun addWallpaperTemplate() {
+        val currentWallpapers = uiState.value.wallpapers
+        val updatedWallpapers = currentWallpapers.toMutableList()
+        updatedWallpapers.add(updatedWallpapers.size, Wallpaper())
+        _uiState.value = _uiState.value.copy(
+            wallpapers = updatedWallpapers,
 
-//        _uiState.addWallpaper(
-//            Wallpaper(
-//                Random.nextLong(),
-//                wallpaperPath,
-//                Uri.EMPTY
-//            )
-//        )
+            )
     }
-
-    fun updateExistWallpaper(wallpaper: Wallpaper) {
-//        dataSource.replaceWallpaper(wallpaper)
-    }
-
 }
