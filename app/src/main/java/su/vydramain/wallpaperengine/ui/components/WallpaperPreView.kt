@@ -157,7 +157,6 @@ fun WallpaperPreView(
 )
 @Composable()
 fun WallpaperPreViewPreview() {
-
     WallpaperEngineAppTheme {
         WallpaperPreView(
             wallpaper = Wallpaper(

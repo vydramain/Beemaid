@@ -23,6 +23,7 @@ fun WallpaperPreViewListContent(
 ) {
     WallpaperPreViewList(
         wallpapers = wallpaperEngineUIState.wallpapers,
+        launchActivityForAddWallpaper = wallpaperEngineUIState.activityLauncherFunction,
         wallpaperLazyListState = wallpaperLazyListState,
         modifier = modifier,
     )
@@ -31,19 +32,10 @@ fun WallpaperPreViewListContent(
 @Composable
 fun WallpaperPreViewList(
     wallpapers: List<Wallpaper>,
+    launchActivityForAddWallpaper: (Wallpaper) -> Unit,
     wallpaperLazyListState: LazyListState,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-//    Column {
-//        wallpapers.forEach { wallpaper ->
-//            WallpaperPreView(
-//                wallpaper = wallpaper,
-//                onChooseClick = {}
-//            )
-//        }
-//    }
-
-
     LazyColumn(
         modifier = modifier,
         state = wallpaperLazyListState
@@ -51,7 +43,7 @@ fun WallpaperPreViewList(
         items(items = wallpapers, key = { it.id }) { wallpaper ->
             WallpaperPreView(
                 wallpaper = wallpaper,
-                onChooseClick = {}
+                onChooseClick = { launchActivityForAddWallpaper(wallpaper) }
             )
         }
     }
