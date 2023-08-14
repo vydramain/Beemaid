@@ -2,6 +2,7 @@ package su.vydramain.wallpaperengine.ui
 
 import android.app.WallpaperManager
 import android.os.Bundle
+import android.util.Log
 
 import androidx.activity.viewModels
 import androidx.activity.ComponentActivity
@@ -29,15 +30,15 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-    //  Opens WallpaperDetailActivity when RecyclerView item is clicked.
-    private fun launchActivity(wallpaper: Wallpaper) {
-        actionGetContentActivityLauncher.launch(wallpaper)
-    }
-
     override fun onCreate(savedInstancesState: Bundle?) {
         super.onCreate(savedInstancesState)
 
-        viewModel.registerActivityLauncherFunction(::launchActivity)
+        //  Opens WallpaperDetailActivity when RecyclerView item is clicked.
+        viewModel.registerActivityLauncherFunction { wallpaper ->
+            actionGetContentActivityLauncher.launch(
+                wallpaper
+            )
+        }
 
         setContent {
             val uiState by viewModel.uiState.collectAsState()

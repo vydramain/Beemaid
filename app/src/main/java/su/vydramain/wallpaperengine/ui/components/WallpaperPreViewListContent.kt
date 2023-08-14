@@ -1,5 +1,6 @@
 package su.vydramain.wallpaperengine.ui.components
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 
 import androidx.compose.foundation.layout.Column
@@ -37,14 +38,12 @@ fun WallpaperPreViewList(
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
-        modifier = modifier,
-        state = wallpaperLazyListState
+        modifier = modifier, state = wallpaperLazyListState
     ) {
         items(items = wallpapers, key = { it.id }) { wallpaper ->
             WallpaperPreView(
                 wallpaper = wallpaper,
-                onChooseClick = { launchActivityForAddWallpaper(wallpaper) }
-            )
+                onChooseClick = { launchActivityForAddWallpaper(wallpaper) })
         }
     }
 }

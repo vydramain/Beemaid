@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import su.vydramain.wallpaperengine.data.Wallpaper
 import su.vydramain.wallpaperengine.data.WallpaperEngineUIState
 
-@Suppress("UNUSED_EXPRESSION")
 class WallpaperEngineViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(WallpaperEngineUIState())
     val uiState: StateFlow<WallpaperEngineUIState> = _uiState
@@ -24,7 +23,7 @@ class WallpaperEngineViewModel : ViewModel() {
     }
 
     fun registerActivityLauncherFunction(f: (Wallpaper) -> Unit) {
-        _uiState.value.activityLauncherFunction = { f }
+        _uiState.value.activityLauncherFunction = f
     }
 
     fun addWallpaperTemplate() {
