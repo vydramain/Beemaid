@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                 WallpaperEngineApp(
                     wallpaperEngineUIState = uiState,
                     addWallpaperTemplate = {
-                        viewModel.addWallpaperTemplate()
+                        viewModel.addWallpaperTemplate(Wallpaper())
                     },
                 )
             }

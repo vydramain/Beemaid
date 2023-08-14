@@ -17,30 +17,26 @@ class WallpaperEngineViewModel : ViewModel() {
     }
 
     private fun initWallpapers() {
-        _uiState.value = WallpaperEngineUIState(
-            emptyList()
-        )
+        _uiState.value = WallpaperEngineUIState()
     }
 
     fun registerActivityLauncherFunction(f: (Wallpaper) -> Unit) {
         _uiState.value.activityLauncherFunction = f
     }
 
-    fun addWallpaperTemplate() {
-        val currentWallpapers = uiState.value.wallpapers
-        val updatedWallpapers = currentWallpapers.toMutableList()
-        updatedWallpapers.add(updatedWallpapers.size, Wallpaper())
-        _uiState.value = _uiState.value.copy(
-            wallpapers = updatedWallpapers
-        )
+    fun addWallpaperTemplate(wallpaper: Wallpaper) {
+        val currentList = _uiState.value.wallpapers.value
+        if (null != currentList) {
+            val updatedList = currentList.toMutableList()
+            updatedList.add(updatedList.size, wallpaper)
+            _uiState.value.wallpapers.postValue(updatedList)
+        }
     }
 
     fun updateWallpaperInstance(wallpaper: Wallpaper) {
-        val updatedWallpapers = uiState.value.wallpapers.toMutableList()
-        _uiState.value = _uiState.value.copy(
-            wallpapers = updatedWallpapers
-                .map { return@map if (it.id == wallpaper.id) wallpaper else it }
-                .toMutableList()
-        )
+        val currentList = _uiState.value.wallpapers.value
+        if (null != currentList) {
+            _uiState.value.wallpapers.postValue(currentList.map { return@map if (it.id === wallpaper.id) wallpaper else it })
+        }
     }
 }

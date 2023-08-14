@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.lifecycle.MutableLiveData
 import su.vydramain.wallpaperengine.R
 import su.vydramain.wallpaperengine.data.Wallpaper
 import su.vydramain.wallpaperengine.data.WallpaperEngineUIState
@@ -87,13 +88,14 @@ fun WallpaperEngineAppContent(
 fun WallpaperEngineAppContentPreview() {
     WallpaperEngineAppContent(
         wallpaperEngineUIState = WallpaperEngineUIState(
-            listOf(
+            MutableLiveData(listOf(
                 Wallpaper(),
                 Wallpaper(),
                 Wallpaper(),
                 Wallpaper(),
                 Wallpaper()
             )
+        )
         ),
         addWallpaperTemplate = {}
     )
