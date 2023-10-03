@@ -3,6 +3,7 @@ package su.vydramain.wallpaperengine.data
 import android.content.res.Resources
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import java.util.UUID
 
 // Handles operations on wallpapersLiveData and holds details about it.
 class WallpapersDataSource(resources: Resources) {
@@ -41,9 +42,9 @@ class WallpapersDataSource(resources: Resources) {
     }
 
     //  Returns wallpaper given an ID.
-    fun getWallpaperForId(id: Long): Wallpaper? {
+    fun getWallpaperForId(id: UUID): Wallpaper? {
         wallpapersLiveData.value?.let { wallpapers ->
-            return wallpapers.firstOrNull { it.id == id }
+            return wallpapers.firstOrNull { it.id.equals(id) }
         }
         return null
     }

@@ -12,17 +12,17 @@ class ActionGetContentAsWallpaperContract :
 
     private lateinit var wallpaper: Wallpaper
 
-    override fun createIntent(context: Context, input: Wallpaper?): Intent {
+    override fun createIntent(context: Context, input: Wallpaper): Intent {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
 
-        wallpaper = input!!
+        wallpaper = input
 
         return intent
     }
 
-    override fun parseResult(resultCode: Int, intent: Intent?): Wallpaper? {
+    override fun parseResult(resultCode: Int, intent: Intent?): Wallpaper {
         if (resultCode == AppCompatActivity.RESULT_OK) {
             val selectedImageUri: Uri? = intent?.data // Get the url of the image from data
             if (null != selectedImageUri) { // update the preview image in the layout
@@ -31,6 +31,7 @@ class ActionGetContentAsWallpaperContract :
                 return wallpaper
             }
         }
-        return null
+
+        return wallpaper
     }
 }
